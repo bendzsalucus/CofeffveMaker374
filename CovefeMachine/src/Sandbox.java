@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Sandbox
  *
- * 
+ *
  */
 public class Sandbox {
 
@@ -19,14 +19,14 @@ public class Sandbox {
 		for(int i =0; i < ran; i++) {
 			int scarlett = randy.nextInt();
 			int johansson = randy.nextInt();
-			
+
 			if(((scarlett + johansson) % 2) == 0) {
 				count++;
 			}
 		}
-		
-		System.out.println(count / ran);
 
+		System.out.println(count / ran);
+		System.out.println("James was here");
 	}
 
 
