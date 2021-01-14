@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * Sandbox
  *
- *
+ * 
  */
 public class Sandbox {
 
@@ -19,15 +19,24 @@ public class Sandbox {
 		for(int i =0; i < ran; i++) {
 			int scarlett = randy.nextInt();
 			int johansson = randy.nextInt();
-
+			
 			if(((scarlett + johansson) % 2) == 0) {
 				count++;
 			}
 		}
-
+		
 		System.out.println(count / ran);
-		System.out.println("James was here");
-		System.out.println("second try");
+		
+		break_out_of_multiple_loops_example:
+		for(int i = 0; i < 100; i++) {
+			for(int j = 0; j < 100; j++) {
+				System.out.println(i + " " + j);
+				if(j == 20 && i == 2) {
+					break break_out_of_multiple_loops_example;
+				}
+			}
+		}
+
 	}
 
 
