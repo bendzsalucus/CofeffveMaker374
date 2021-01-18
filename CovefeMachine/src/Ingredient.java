@@ -1,10 +1,10 @@
 
-public class Ingrideint {
+public class Ingredient {
 	
 	private String name;
 	private String description; 
 	
-	public Ingrideint(String name, String desciption)
+	public Ingredient(String name, String desciption)
 	{	
 		
 	}
