@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class DrinkRecipe {
 
-	ArrayList<Ingrideint> ingridients;
+	ArrayList<Ingredient> ingredient;
 
-	public DrinkRecipe(ArrayList<Ingrideint> ingrideints) {
-		this.ingridients = ingrideints;
+	public DrinkRecipe(ArrayList<Ingredient> ingrideints) {
+		this.ingredient = ingrideints;
 	}
 
 }
