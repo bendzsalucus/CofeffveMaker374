@@ -3,8 +3,9 @@ import java.util.ArrayList;
 public class DrinkRecipe {
 
 	ArrayList<Ingredient> ingredient;
+	String name;
 
-	public DrinkRecipe(ArrayList<Ingredient> ingrideints) {
+	public DrinkRecipe(String name, ArrayList<Ingredient> ingrideints) {
 		this.ingredient = ingrideints;
 	}
 
