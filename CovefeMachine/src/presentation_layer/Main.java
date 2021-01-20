@@ -1,7 +1,14 @@
+package presentation_layer;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import business_layer.*;
+
 public class Main {
+	
+	static ArrayList<Server> servers;
+	static ArrayList<SimulatedMobileDevice> mobileApps;
 
 	public static void main(String[] args) {
 		
