@@ -45,12 +45,18 @@ public class Server implements Observer, Subject {
 	}
 
 	public void update(String message) {
-		// TODO: Send back to the mobileApp
+		String[] messageParts = message.split(" ");
+		serverNotice("Recieved recipe " + messageParts[0] + " " + messageParts[1] + " from coffee controller with id " + messageParts[2]);
 	}
 
 	public void update(DrinkRecipe recipe) {
 		this.processingRecipe = recipe;
+		serverNotice("Processing recipe " + recipe.getName());
 		notifyObservers();
+	}
+	
+	private void serverNotice(String message) {
+		System.out.println("Server: " + message);
 	}
 
 }

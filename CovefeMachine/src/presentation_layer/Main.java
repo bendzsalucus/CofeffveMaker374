@@ -15,6 +15,7 @@ public class Main {
 		
 		servers = new ArrayList<Server>();
 		
+		// Only one server for this demo
 		servers.add(new Server());
 
 		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
@@ -45,8 +46,10 @@ public class Main {
 
 		DrinkRecipe order = drinks.get(orderNum);
 		scanny.close();
-		servers.get(0).update(order);
 		System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
+		servers.get(0).update(order);
+		
+		
 		// Controller.make(order);
 
 	}

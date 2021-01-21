@@ -42,7 +42,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	}
 
 	public void notifyObservers() {
-		server.update(status);
+		server.update(status+ " " + id);
 	}
 	
 	public void update(String message) {}
