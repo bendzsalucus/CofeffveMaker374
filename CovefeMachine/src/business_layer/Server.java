@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import interfaces.*;
+import presentation_layer.*;
 
 public class Server implements Observer, Subject {
 	
@@ -47,6 +48,7 @@ public class Server implements Observer, Subject {
 	public void update(String message) {
 		String[] messageParts = message.split(" ");
 		serverNotice(messageParts[0] + " " + messageParts[1] + " from coffee controller with id " + messageParts[2]);
+		Main.update(messageParts[1]);
 	}
 
 	public void update(DrinkRecipe recipe) {

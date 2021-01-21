@@ -56,6 +56,16 @@ public class Main {
 		// Controller.make(order);
 
 	}
+	
+	// Temporary
+	public static void update(String message) {
+		if(message.equals("Ready")) {
+			System.out.println("Your Order is Ready!");
+		} else {
+			System.out.println("Your Order wasn't processed properly.");
+		}
+		
+	}
 
 	private static HashMap<String, Ingredient> setUpExtraIngridents() {
 		HashMap<String, Ingredient> temp = new HashMap<String, Ingredient>();
