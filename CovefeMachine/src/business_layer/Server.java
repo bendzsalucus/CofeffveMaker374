@@ -6,11 +6,14 @@ import java.util.HashMap;
 import interfaces.*;
 
 public class Server implements Observer, Subject {
-
-	private HashMap<String, Object> entires;
+	
+	private HashMap<String, Object> entries;
+	
+	ArrayList<Observer> observers;
 
 	public Server() {
-		HashMap entries = new HashMap<String, Object>();
+		entries = new HashMap<String, Object>();
+		observers = new ArrayList<Observer>();
 	}
 
 	public void addDataseItem(String makeNewList, ArrayList<Object> items) {
@@ -18,23 +21,23 @@ public class Server implements Observer, Subject {
 	}
 	
 	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
+		observers.add(o);
 	}
 
 	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
+		observers.remove(o);
 	}
 
 	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
+		for(Observer o: observers) {
+			o.update(recipe);
+			break;	// Just does the first controller for now
+		}
 	}
 
 	public void update(String message) {
-		// TODO Auto-generated method stub
-		
 	}
+
+	public void update(Recipe recipe) {}
 
 }
