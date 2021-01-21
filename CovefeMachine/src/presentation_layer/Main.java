@@ -26,29 +26,32 @@ public class Main {
 //		for(DrinkRecipe d: drinks) {
 //			System.out.println(d.getName());
 //		}
-
-		for (int i = 0; i < drinks.size(); i++) {
-			DrinkRecipe cur = drinks.get(i);
-			System.out.println(i + ". " + cur.getName() + "   Ingridients:  " + cur.getIngredientsString());
-		}
-
-		Scanner scanny = new Scanner(System.in);
-		int orderNum = 0;
-		try {
-			System.out.println("______________________________");
-			System.out.println("Enter the number of the drink you want: ");
-			orderNum = scanny.nextInt();
-		}
-
-		catch (Exception e) {
-			System.out.println("Invalid Input");
-		}
-
-		DrinkRecipe order = drinks.get(orderNum);
-		scanny.close();
-		System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
-		servers.get(0).update(order);
 		
+		Scanner scanny = new Scanner(System.in);
+		
+		while(true) {
+			for (int i = 0; i < drinks.size(); i++) {
+				DrinkRecipe cur = drinks.get(i);
+				System.out.println(i + ". " + cur.getName() + "   Ingridients:  " + cur.getIngredientsString());
+			}
+	
+			int orderNum = 0;
+			try {
+				System.out.println("______________________________");
+				System.out.println("Enter the number of the drink you want: ");
+				orderNum = Integer.parseInt(scanny.nextLine());
+			}
+	
+			catch (Exception e) {
+				System.out.println("Invalid Input");
+			}
+	
+			DrinkRecipe order = drinks.get(orderNum);
+			
+			
+			System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
+			servers.get(0).update(order);
+		}
 		
 		// Controller.make(order);
 

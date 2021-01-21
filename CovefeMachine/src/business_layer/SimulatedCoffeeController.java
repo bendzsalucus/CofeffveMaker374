@@ -54,7 +54,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	}
 	
 	private void coffeeControllerNotice(String message) {
-		System.out.println("Coffee controller " + id + ": " + message);
+		System.out.println("\u001B[32mCoffee controller " + id + ": " + message + "\u001B[0m");
 	}
 	
 

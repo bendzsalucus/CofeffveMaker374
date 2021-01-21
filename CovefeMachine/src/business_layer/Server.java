@@ -46,7 +46,7 @@ public class Server implements Observer, Subject {
 
 	public void update(String message) {
 		String[] messageParts = message.split(" ");
-		serverNotice("Recieved recipe " + messageParts[0] + " " + messageParts[1] + " from coffee controller with id " + messageParts[2]);
+		serverNotice(messageParts[0] + " " + messageParts[1] + " from coffee controller with id " + messageParts[2]);
 	}
 
 	public void update(DrinkRecipe recipe) {
@@ -56,7 +56,7 @@ public class Server implements Observer, Subject {
 	}
 	
 	private void serverNotice(String message) {
-		System.out.println("Server: " + message);
+		System.out.println("\u001B[33mServer: " + message + "\u001B[0m");
 	}
 
 }
