@@ -12,6 +12,10 @@ public class Main {
 	static ArrayList<SimulatedMobileDevice> mobileApps;
 
 	public static void main(String[] args) {
+		
+		servers = new ArrayList<Server>();
+		
+		servers.add(new Server());
 
 		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
 		ArrayList<DrinkRecipe> drinks = setUpDrinks(ingreidientsList);
@@ -41,6 +45,7 @@ public class Main {
 
 		DrinkRecipe order = drinks.get(orderNum);
 		scanny.close();
+		servers.get(0).update(order);
 		System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
 		// Controller.make(order);
 

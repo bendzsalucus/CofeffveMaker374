@@ -7,22 +7,22 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	Observer server;
 	
+	BrewBehavior behavior;
 	String status;
-	Recipe recipe;
+	DrinkRecipe recipe;
 	int id;
 	
 	public SimulatedCoffeeController(int id) {
 		this.id = id;
+		this.behavior = new SimpleBehavior(); // temporary
 	}
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		status = "Order Started";
 		coffeeControllerNotice("Started coffee!");
-		try {
-			Thread.sleep(7200000);
-		} catch (InterruptedException e) {}
+		behavior.brew();
 		status = "Order Ready";
-		coffeeControllerNotice("Finished coffee!");
+		coffeeControllerNotice("Dispersed coffee!");
 		notifyObservers();
 	}
 
@@ -47,14 +47,14 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	public void update(String message) {}
 	
-	private void coffeeControllerNotice(String message) {
-		System.out.println("Coffee controller " + id + ": " + message);
-	}
-	
-	public void update(Recipe recipe) {
+	public void update(DrinkRecipe recipe) {
 		this.recipe = recipe;
         Thread t = new Thread(this);
         t.start();
+	}
+	
+	private void coffeeControllerNotice(String message) {
+		System.out.println("Coffee controller " + id + ": " + message);
 	}
 	
 

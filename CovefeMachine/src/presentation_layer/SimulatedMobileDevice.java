@@ -1,5 +1,6 @@
 package presentation_layer;
 
+import business_layer.DrinkRecipe;
 import business_layer.Server;
 import interfaces.*;
 
@@ -52,6 +53,12 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 	
 	private void simulateDeviceDisplay(String message) {
 		System.out.println("Mobile device " + deviceNumber + ": " + message + "\n");
+	}
+
+	@Override
+	public void update(DrinkRecipe recipe) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

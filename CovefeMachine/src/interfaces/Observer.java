@@ -1,10 +1,10 @@
 package interfaces;
 
-import business_layer.Recipe;
+import business_layer.DrinkRecipe;
 
 public interface Observer {
 	
-	public void update(Recipe recipe);
+	public void update(DrinkRecipe recipe);
 	public void update(String instruction);
 	
 }
