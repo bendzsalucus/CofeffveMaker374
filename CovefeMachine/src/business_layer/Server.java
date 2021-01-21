@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import interfaces.*;
 
-public class Server implements Observer, Subject, Runnable {
+public class Server implements Observer, Subject {
 
 	private HashMap<String, Object> entires;
 
@@ -16,32 +16,22 @@ public class Server implements Observer, Subject, Runnable {
 	public void addDataseItem(String makeNewList, ArrayList<Object> items) {
 		
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	
 	public void registerObserver(Observer o) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void removeObserver(Observer o) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void update(String message) {
 		// TODO Auto-generated method stub
 		
