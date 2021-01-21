@@ -1,6 +1,7 @@
 package presentation_layer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import business_layer.*;
@@ -12,26 +13,29 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		ArrayList<Ingredient> extrasList = setUpIngridents();		
-		ArrayList<Ingredient> ingreidientsList = setUpExtraIngridents();
+		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
+		ArrayList<DrinkRecipe> extrasList = setUpDrinks(ingreidientsList);		
 
 		
 		ArrayList<Ingredient> order = new ArrayList<Ingredient>();
 
 		System.out.println("New Order. Enter your option");
-		Scanner scanny = new Scanner(System.in); 
 		
-		while(true) {
-			String option = scanny.next();
-			for(Ingredient i: options) {
-				if(i.toString().equals(option)) {
-					order.add(i);
-				}
-			}
-			if(option.equals("done")) {
-				break;
-			}
-		}
+		extrasList.
+		
+//		Scanner scanny = new Scanner(System.in); 
+		
+//		while(true) {
+//			String option = scanny.next();
+//			for(Ingredient i: options) {
+//				if(i.toString().equals(option)) {
+//					order.add(i);
+//				}
+//			}
+//			if(option.equals("done")) {
+//				break;
+//			}
+//		}
 		
 		
 		
@@ -41,26 +45,83 @@ public class Main {
 
 	}
 
-	private static ArrayList<Ingredient> setUpExtraIngridents() {
-		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
-		temp.add(new Ingredient("Milk", "Cow stuff"));
-		temp.add(new Ingredient("Bark", "Tree stuff"));
-		temp.add(new Ingredient("Cheese", "Goat stuff"));
-		temp.add(new Ingredient("Cinnamon", "Challenge stuff"));
-		temp.add(new Ingredient("Sugar", "Cane stuff"));
-
-		return null;
+	private static HashMap<String, Ingredient> setUpExtraIngridents() {
+		HashMap<String, Ingredient> temp = new HashMap<String, Ingredient>();
+		temp.put("Milk" , (new Ingredient("Milk", "Cow stuff"))); 
+		temp.put("Bark" , (new Ingredient("Bark", "Tree stuff"))); 
+		temp.put("Caramel" , (new Ingredient("Caramel", "Sweet Brown Stuff"))); 
+		temp.put("Cinnamon" , (new Ingredient("Cinnamon", "Challenge stuff"))); 
+		temp.put("Sugar" , (new Ingredient("Sugar", "Cane stuff"))); 
+		temp.put("American Beans" , (new Ingredient("American Beans", "Beans grown in America"))); 
+		temp.put("Brazilian Beans" , (new Ingredient("Brazilian Beans", "Beans from Brazil"))); 
+		temp.put("Amazon Beans" , (new Ingredient("Amazon Beans", "Prime Beans"))); 
+		return temp;
 	}
 
-	private static ArrayList<Ingredient> setUpIngridents() {
+	private static ArrayList<DrinkRecipe> setUpDrinks(HashMap<String, Ingredient> ingreidientsList) {
+		ArrayList<DrinkRecipe> drinks = new ArrayList<DrinkRecipe>();
+		
 		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
-		temp.add(new Ingredient("Milk", "Cow stuff"));
-		temp.add(new Ingredient("Sugar", "Cane stuff"));
-		temp.add(new Ingredient("Cinnamon", "Challenge stuff"));
-		temp.add(new Ingredient("Milk", "Cow stuff"));
-		temp.add(new Ingredient("Milk", "Cow stuff"));
+		temp.add(ingreidientsList.get("American Beans"));
+		drinks.add(new DrinkRecipe("American Black Coffee", temp));
 
-		return null;
+		temp.clear();
+		temp.add(ingreidientsList.get("American Beans"));
+		temp.add(ingreidientsList.get("Bark"));
+		temp.add(ingreidientsList.get("Milk"));
+		drinks.add(new DrinkRecipe("Mocha", temp));
+
+		temp.clear();
+		temp.add(ingreidientsList.get("American Beans"));
+		temp.add(ingreidientsList.get("Sugar"));
+		temp.add(ingreidientsList.get("Milk"));
+		temp.add(ingreidientsList.get("Bark"));
+		drinks.add(new DrinkRecipe("Scarlett Surprise", temp));
+		
+		temp.clear();
+		temp.add(ingreidientsList.get("Milk"));
+		temp.add(ingreidientsList.get("Sugar"));
+		temp.add(ingreidientsList.get("Cinnamon"));
+		drinks.add(new DrinkRecipe("Cold Brew", temp));
+		
+		temp.clear();
+		temp.add(ingreidientsList.get("Milk"));
+		temp.add(ingreidientsList.get("Sugar"));
+		temp.add(ingreidientsList.get("Cinnamon"));
+		temp.add(ingreidientsList.get("Amazon Beans"));
+		drinks.add(new DrinkRecipe("Caramel Macchiato", temp));
+		
+		temp.clear();
+		temp.add(ingreidientsList.get("Milk"));
+		temp.add(ingreidientsList.get("Sugar"));
+		temp.add(ingreidientsList.get("Caramel"));
+		temp.add(ingreidientsList.get("Amazon Beans"));
+		drinks.add(new DrinkRecipe("Doice Skinny Latte", temp));
+
+		return drinks;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
