@@ -1,11 +1,2 @@
-/Subject.class
-/Observer.class
-/SimulatedMobileDevice.class
-/SimulatedServer.class
-/Server.class
-/Pausable.class
 /presentation_layer/
 /interfaces/
-/buisness_layer/
-/data_layer/
-/business_layer/

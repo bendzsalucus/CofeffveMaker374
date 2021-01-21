@@ -17,7 +17,9 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 		
 		try {
 			Thread.sleep(1000);
-		} catch (InterruptedException e) {}
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 		
 		// Just connects to the first server for now
 		for(Server s : Main.servers) {
@@ -28,14 +30,15 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 	}
 
 	public void update(String message) {
-		System.out.println("Mobile device " + deviceNumber + ": "+ message + "\n");
+		simulateDeviceDisplay(message);
 	}
 
 	public void registerObserver(Observer o) {
 		if(server != null) {
-			System.out.println("Mobile device " + deviceNumber + ": This device tried to connect to multiple servers.\n");
+			simulateDeviceDisplay("Tried to connect to multiple servers at the same time.");
 		} else {
 			server = o;
+			simulateDeviceDisplay("Connected to server");
 		}
 	}
 
@@ -45,6 +48,10 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 
 	public void notifyObservers() {
 		server.update(order);
+	}
+	
+	private void simulateDeviceDisplay(String message) {
+		System.out.println("Mobile device " + deviceNumber + ": " + message + "\n");
 	}
 
 }
