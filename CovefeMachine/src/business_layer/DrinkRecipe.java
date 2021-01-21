@@ -27,7 +27,7 @@ public class DrinkRecipe {
 			list.append(e.getName());
 		});
 
-		return list.toString();
+		return list.toString(); 
 	}
 
 }
