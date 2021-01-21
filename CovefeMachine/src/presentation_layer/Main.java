@@ -14,14 +14,18 @@ public class Main {
 	public static void main(String[] args) {
 		
 		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
-		ArrayList<DrinkRecipe> extrasList = setUpDrinks(ingreidientsList);		
+		ArrayList<DrinkRecipe> drinks = setUpDrinks(ingreidientsList);		
 
 		
 		ArrayList<Ingredient> order = new ArrayList<Ingredient>();
 
-		System.out.println("New Order. Enter your option");
+		System.out.println("Menu:________________________________");
 		
-		extrasList.
+		drinks.forEach(e ->{
+			System.out.println(e.getName() + " " + e.getIngredientsString());
+			
+		});
+		
 		
 //		Scanner scanny = new Scanner(System.in); 
 		
