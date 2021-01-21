@@ -19,10 +19,10 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		status = "Order Started";
-		coffeeControllerNotice("Started coffee!");
+		coffeeControllerNotice("Started coffee: " + recipe.getName());
 		behavior.brew();
 		status = "Order Ready";
-		coffeeControllerNotice("Dispersed coffee!");
+		coffeeControllerNotice("Dispersed coffee: " + recipe.getName());
 		notifyObservers();
 	}
 

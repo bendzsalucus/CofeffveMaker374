@@ -19,7 +19,7 @@ public class Server implements Observer, Subject {
 		// Temp
 		SimulatedCoffeeController c0 = new SimulatedCoffeeController(0);
 		SimulatedCoffeeController c1 = new SimulatedCoffeeController(1);
-		c1.registerObserver(this);
+		c0.registerObserver(this);
 		c1.registerObserver(this);
 		registerObserver(c0);
 		registerObserver(c1);
