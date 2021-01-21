@@ -8,8 +8,8 @@ public class DrinkRecipe {
 	String name;
 
 	public DrinkRecipe(String name, ArrayList<Ingredient> ingrideints) {
+		this.name = name;
 		this.ingredient = ingrideints;
-		getName();
 	}
 
 	public String getName() {
@@ -25,9 +25,10 @@ public class DrinkRecipe {
 
 		ingredient.forEach(e -> {
 			list.append(e.getName());
+			list.append(", ");
 		});
-
-		return list.toString(); 
+		
+		return list.substring(0, list.length() -2);
 	}
 
 }
