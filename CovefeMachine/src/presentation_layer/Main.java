@@ -3,6 +3,7 @@ package presentation_layer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import business_layer.*;
@@ -19,12 +20,11 @@ public class Main {
 		// Only one server for this demo
 		servers.add(new Server());
 
-		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
+		HashMap<String, Ingredient> ingreidientsList = setUpIngridents();
 		ArrayList<DrinkRecipe> drinks = setUpDrinks(ingreidientsList);
-		List<Ingredient> condiments =  Arrays.asList(ingreidientsList.values().toArray());
+		ArrayList<Ingredient> condiments = setupExtraIngriedents();
 
 		System.out.println("Menu:________________________________");
-
 
 		Scanner scanny = new Scanner(System.in);
 
@@ -47,9 +47,10 @@ public class Main {
 
 			DrinkRecipe order = drinks.get(orderNum);
 
-			condimentOrder(scanny, null);
-			
-			
+			ArrayList<Ingredient> added = new ArrayList<Ingredient>();
+			condimentOrder(scanny, condiments, true, added);
+			System.out.println("I'm back");
+			order.addExtras(added);
 
 			System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
 			servers.get(0).update(order);
@@ -59,26 +60,88 @@ public class Main {
 
 	}
 
-	private static ArrayList<Ingredient> condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments) {
-		while (true) {
-			
-			System.out.println("Would you like any condiments with your order? Enter as many as you like. ");
-			
+//	private static void condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments, boolean first,
+//			ArrayList<Ingredient> added, boolean done) {
+//		while (true) {
+//
+//			if (first) {
+//				System.out.println("Would you like any condiments with your order? Enter 404 to singal you are done.");
+//
+//				for (int i = 0; i < condiments.size(); i++) {
+//					Ingredient cur = condiments.get(i);
+//					System.out.println(i + ". " + cur.getName());
+//				}
+//			} else {
+//				System.out.println("Anything else?");
+//			}
+//
+//			int scarlett = 0;
+//
+//			try {
+//				scarlett = scanny.nextInt();
+//			} catch (Exception e) {
+//				System.out.println("Invalid Order.");
+//				condimentOrder(scanny, condiments, false, added, true);
+//			}
+//
+//			for (int i = 0; i < condiments.size(); i++) {
+//				if (scarlett == i) {
+//					added.add(condiments.get(i));
+//				}
+//			}
+//
+//			if (scarlett == 404) {
+//				System.out.println("404 HELP");
+//				return;
+//			}
+//			condimentOrder(scanny, condiments, false, added, true);
+//
+//		}
+//	}
+
+	
+	private static boolean condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments, boolean first,
+			ArrayList<Ingredient> added) {
+		while (condimentOrder(scanny, condiments, false, added)) {
+
+			if (first) {
+				System.out.println("Would you like any condiments with your order? Enter 404 to singal you are done.");
+
+				for (int i = 0; i < condiments.size(); i++) {
+					Ingredient cur = condiments.get(i);
+					System.out.println(i + ". " + cur.getName());
+				}
+			} else {
+				System.out.println("Anything else?");
+			}
+
+			int scarlett = 0;
+
+			try {
+				scarlett = scanny.nextInt();
+			} catch (Exception e) {
+				System.out.println("Invalid Order.");
+				condimentOrder(scanny, condiments, false, added);
+				return true;
+			}
+
 			for (int i = 0; i < condiments.size(); i++) {
-				Ingredient cur = condiments.get(i);
-				System.out.println(i + ". " + cur.getName() + "   Condiments:  " + cur.toString());
+				if (scarlett == i) {
+					added.add(condiments.get(i));
+				}
 			}
 
-			String scarlett = scanny.next();
-
-			if (scarlett.equals("done")) {
-				break;
+			if (scarlett == 404) {
+				System.out.println("404 HELP");
+				return false;
 			}
-			
-			
-		}		
+			condimentOrder(scanny, condiments, false, added);
+			return true;
+
+		}
+		return true;
 	}
-
+	
 	// Temporary
 	public static void update(String message) {
 		if (message.equals("Ready")) {
@@ -89,7 +152,7 @@ public class Main {
 
 	}
 
-	private static HashMap<String, Ingredient> setUpExtraIngridents() {
+	private static HashMap<String, Ingredient> setUpIngridents() {
 		HashMap<String, Ingredient> temp = new HashMap<String, Ingredient>();
 		temp.put("Milk", (new Ingredient("Milk", "Cow stuff")));
 		temp.put("Bark", (new Ingredient("Bark", "Tree stuff")));
@@ -100,6 +163,19 @@ public class Main {
 		temp.put("Brazilian Beans", (new Ingredient("Brazilian Beans", "Beans from Brazil")));
 		temp.put("Amazon Beans", (new Ingredient("Amazon Beans", "Prime Beans")));
 		return temp;
+	}
+
+	private static ArrayList<Ingredient> setupExtraIngriedents() {
+		ArrayList<Ingredient> extras = new ArrayList<Ingredient>();
+		extras.add((new Ingredient("Milk", "Cow stuff")));
+		extras.add((new Ingredient("Bark", "Tree stuff")));
+		extras.add((new Ingredient("Caramel", "Sweet Brown Stuff")));
+		extras.add((new Ingredient("Cinnamon", "Challenge stuff")));
+		extras.add((new Ingredient("Sugar", "Cane stuff")));
+		extras.add((new Ingredient("American Beans", "Beans grown in America")));
+		extras.add((new Ingredient("Brazilian Beans", "Beans from Brazil")));
+		extras.add((new Ingredient("Amazon Beans", "Prime Beans")));
+		return extras;
 	}
 
 	private static ArrayList<DrinkRecipe> setUpDrinks(HashMap<String, Ingredient> ingreidientsList) {

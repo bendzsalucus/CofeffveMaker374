@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class DrinkRecipe {
 
-	ArrayList<Ingredient> ingredient;
+	ArrayList<Ingredient> ingredients;
 	String name;
 
 	public DrinkRecipe(String name, ArrayList<Ingredient> ingrideints) {
 		this.name = name;
-		this.ingredient = ingrideints;
+		this.ingredients = ingrideints;
 	}
 
 	public String getName() {
@@ -17,18 +17,22 @@ public class DrinkRecipe {
 	}
 
 	public ArrayList<Ingredient> getIngredients() {
-		return this.ingredient;
+		return this.ingredients;
 	}
 
 	public String getIngredientsString() {
 		StringBuilder list = new StringBuilder();
 
-		ingredient.forEach(e -> {
+		ingredients.forEach(e -> {
 			list.append(e.getName());
 			list.append(", ");
 		});
-		
-		return list.substring(0, list.length() -2);
+
+		return list.substring(0, list.length() - 2);
+	}
+
+	public void addExtras(ArrayList<Ingredient> added) {
+		ingredients.addAll(added);
 	}
 
 }
