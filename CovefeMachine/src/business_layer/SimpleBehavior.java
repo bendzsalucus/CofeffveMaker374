@@ -6,7 +6,9 @@ public class SimpleBehavior implements BrewBehavior {
 	public void brew() {
 		try {
 			Thread.sleep(4000);
-		} catch (InterruptedException e) {}
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
 	}
 	
 	
