@@ -1,6 +1,7 @@
 package presentation_layer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -12,59 +13,80 @@ public class Main {
 	static ArrayList<SimulatedMobileDevice> mobileApps;
 
 	public static void main(String[] args) {
-		
+
 		servers = new ArrayList<Server>();
-		
+
 		// Only one server for this demo
 		servers.add(new Server());
 
 		HashMap<String, Ingredient> ingreidientsList = setUpExtraIngridents();
 		ArrayList<DrinkRecipe> drinks = setUpDrinks(ingreidientsList);
+		List<Ingredient> condiments =  Arrays.asList(ingreidientsList.values().toArray());
 
 		System.out.println("Menu:________________________________");
 
-//		for(DrinkRecipe d: drinks) {
-//			System.out.println(d.getName());
-//		}
-		
+
 		Scanner scanny = new Scanner(System.in);
-		
-		while(true) {
+
+		while (true) {
 			for (int i = 0; i < drinks.size(); i++) {
 				DrinkRecipe cur = drinks.get(i);
 				System.out.println(i + ". " + cur.getName() + "   Ingridients:  " + cur.getIngredientsString());
 			}
-	
+
 			int orderNum = 0;
 			try {
 				System.out.println("______________________________");
 				System.out.println("Enter the number of the drink you want: ");
 				orderNum = Integer.parseInt(scanny.nextLine());
 			}
-	
+
 			catch (Exception e) {
 				System.out.println("Invalid Input");
 			}
-	
+
 			DrinkRecipe order = drinks.get(orderNum);
+
+			condimentOrder(scanny, null);
 			
 			
+
 			System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
 			servers.get(0).update(order);
 		}
-		
+
 		// Controller.make(order);
 
 	}
-	
+
+	private static ArrayList<Ingredient> condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments) {
+		while (true) {
+			
+			System.out.println("Would you like any condiments with your order? Enter as many as you like. ");
+			
+			for (int i = 0; i < condiments.size(); i++) {
+				Ingredient cur = condiments.get(i);
+				System.out.println(i + ". " + cur.getName() + "   Condiments:  " + cur.toString());
+			}
+
+			String scarlett = scanny.next();
+
+			if (scarlett.equals("done")) {
+				break;
+			}
+			
+			
+		}		
+	}
+
 	// Temporary
 	public static void update(String message) {
-		if(message.equals("Ready")) {
+		if (message.equals("Ready")) {
 			System.out.println("Your Order is Ready!");
 		} else {
 			System.out.println("Your Order wasn't processed properly.");
 		}
-		
+
 	}
 
 	private static HashMap<String, Ingredient> setUpExtraIngridents() {
