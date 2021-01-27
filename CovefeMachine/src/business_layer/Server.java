@@ -1,7 +1,11 @@
 package business_layer;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.json.simple.parser.ParseException;
 
 import interfaces.*;
 import presentation_layer.*;
@@ -9,12 +13,15 @@ import presentation_layer.*;
 public class Server implements Observer, Subject {
 	
 	private HashMap<String, Object> entries;
-	
+	Parsers parser;
 	ArrayList<Observer> observers;
+	ArrayList<Order> orders;
 	
 	DrinkRecipe processingRecipe;
+	Order processingOrder;
 
 	public Server() {
+		parser = new Parsers();
 		entries = new HashMap<String, Object>();
 		observers = new ArrayList<Observer>();
 		// Temp
@@ -59,6 +66,57 @@ public class Server implements Observer, Subject {
 	
 	private void serverNotice(String message) {
 		System.out.println("\u001B[33mServer: " + message + "\u001B[0m");
+	}
+
+	public void updateOrder(int orderID, int status, String errordesc, int errorcode) {
+    	//updateOrder updates the order with response from the controllers.
+		for(Order currentOrder: orders) {
+			if(currentOrder.getOrderID() == orderID) {
+				if(status == 0) {
+					//status 0 means done
+					currentOrder.setOrderCompleted();
+					System.out.println("[JSONSimulation-Controller] OrderID: "+orderID+ "is ready. Errorcode: "+errorcode +" Error describtion: "+errordesc);
+					//TODO sendUserResonse with JSON
+				}else {
+					//status 1 
+					currentOrder.setErrorcode(errorcode);
+					currentOrder.setErrordesc(errordesc);
+					System.out.println("[JSONSimulation-Controller] OrderID: "+orderID+ "fail to brew. Errorcode: "+errorcode +" Error describtion: "+errordesc);
+					//TODO sendUserResonse with JSON
+//					e.g. 
+//					"user-response": {
+//					    "orderID": 1,
+//					    "coffee_machine_id": 1,
+//					    "status": 0,
+//					    "status-message": "Your coffee has been prepared with your desired options."
+//					  }
+					
+				}
+			}
+		}
+
+		
+	}
+
+	public void JSONSimulation() {
+		ArrayList<Order> JSONOrders = new ArrayList<Order>();
+		//simulating receiving the order from Mobile phone with a JSON order file sending in
+		//Generate a list of order
+		try {
+			JSONOrders = parser.parseOrderInput();
+		} catch (IOException | ParseException | URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("[JSONSimulation] Bad parsing");
+		}
+		
+		for(Order order : JSONOrders) {
+			orders.add(order);
+			System.out.println("[JSONSimulation] Order Recieve. OrderID: " + order.getOrderID());
+		}
+		
+		//TODO orders are bunch of orders need to send to controller to brew
+		// Order has a lot of info including drinkName, e.g. Americano, comdiments - ArrayList<Ingredient>
 	}
 
 }

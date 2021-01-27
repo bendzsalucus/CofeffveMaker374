@@ -227,5 +227,10 @@ public class Main {
 
 		return drinks;
 	}
+	
+	public void JSONSimulation() {
+		Server server = servers.get(0);
+		server.JSONSimulation();
+	}
 
 }

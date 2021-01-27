@@ -1,3 +1,4 @@
+[
 {
   "user-response": {
     "orderID": 1,
@@ -5,7 +6,7 @@
     "status": 0,
     "status-message": "Your coffee has been prepared with your desired options."
   }
-}
+},
 {
   "user-response": {
     "orderID": 2,
@@ -14,7 +15,7 @@
     "status-message": "Your coffee order has been cancelled.",
     "error-message": "Out of milk, drink cancelled."
   }
-}
+},
 {
   "user-response": {
     "orderID": 3,
@@ -24,3 +25,4 @@
     "error-message": "Machine jammed."
   }
 }
+]

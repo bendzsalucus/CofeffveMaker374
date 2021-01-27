@@ -1,11 +1,19 @@
 package business_layer;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import org.json.simple.parser.ParseException;
+
 import interfaces.Observer;
 import interfaces.Subject;
+import presentation_layer.Parsers;
+ 
 
 public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	Observer server;
+	Parsers parser;
 	
 	BrewBehavior behavior;
 	String status;
@@ -15,12 +23,23 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	public SimulatedCoffeeController(int id) {
 		this.id = id;
 		this.behavior = new SimpleBehavior(); // temporary
+		
+	}
+	
+	public void simulateControllerResponse() {
+		try {
+			parser.parseControllerResponse(server);
+		} catch (IOException | ParseException | URISyntaxException e) {
+			System.out.println("[JSONSimulation]  Controller Response Parsing falls");
+			e.printStackTrace();
+		}
 	}
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		status = "Order Started";
 		coffeeControllerNotice("Started coffee: " + recipe.getName());
 		behavior.brew();
+		
 		status = "Order Ready";
 		coffeeControllerNotice("Dispersed coffee: " + recipe.getName());
 		notifyObservers();
