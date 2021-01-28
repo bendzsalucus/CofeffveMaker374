@@ -70,10 +70,19 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	public void update(Order order) {
 		this.order = order;
 		this.recipe = order.getDrinkRecipe();
+		specifyOrderRequestType(order);
         Thread t = new Thread(this);
         t.start();
 	}
 	
+	private void specifyOrderRequestType(Order order) {
+		if(order.getIngredients().size()>0) {
+			order.setRequesttype("Automated");
+		}else {
+			order.setRequesttype("Simple");
+		}
+	}
+
 	private void coffeeControllerNotice(String message) {
 		System.out.println("\u001B[32mCoffee controller " + id + ": " + message + "\u001B[0m");
 	}

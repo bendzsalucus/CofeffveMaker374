@@ -60,6 +60,7 @@ public class Server implements Observer, Subject {
 
 	public void update(Order order) {
 		DrinkRecipe recipe = order.getDrinkRecipe();
+		this.processingOrder = order;
 		this.processingRecipe = recipe;
 		serverNotice("Processing recipe " + recipe.getName());
 		notifyObservers();

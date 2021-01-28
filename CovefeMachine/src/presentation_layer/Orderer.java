@@ -34,17 +34,20 @@ public class Orderer {
 	private void preBuiltOrder(int orderNum, ArrayList<Integer> sentConds) {
 
 		DrinkRecipe drinkRecipe = drinks.get(orderNum);
-		Order order = new Order(orderNum, "5500 WABASH AVE", 47803, drinkRecipe);
+//		System.out.println(drinkRecipe.getName());
+		Order order = new Order(22, "5500 WABASH AVE", 47803, drinkRecipe);
 
 		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
 
 		for (int i = 0; i < sentConds.size(); i++) {
 			added.add(condiments.get(sentConds.get(i)));
+//			System.out.println("here");
 		}
 
 		drinkRecipe.addExtras(added);
 
 		System.out.println("You ordered: " + drinkRecipe.getName() + " with " + drinkRecipe.getIngredientsString());
+//		System.out.println(order.getOrderID());
 		servers.get(0).update(order);
 
 		return;

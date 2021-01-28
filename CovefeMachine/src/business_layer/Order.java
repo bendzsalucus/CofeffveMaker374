@@ -35,6 +35,7 @@ public class Order {
 		this.setStreet(street);
 		this.setZIP(ZIP);
 		this.drinkRecipe = drinkRecipe;
+//		System.out.println(drinkRecipe.getName());
 //		this.setDrinkName(drinkName);
 //		this.setIngredients(ingredients);
 	} 
