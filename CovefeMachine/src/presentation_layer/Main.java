@@ -13,115 +13,82 @@ public class Main {
 	static ArrayList<Server> servers;
 	static ArrayList<SimulatedMobileDevice> mobileApps;
 	static boolean ordering;
+	private static HashMap<String, Ingredient> ingreidientsList;
+	private static ArrayList<DrinkRecipe> drinks;
+	private static ArrayList<Ingredient> condiments;
 
 	public static void main(String[] args) {
 
+		init();
+		handleOrdering();
+		// Controller.make(order);
+
+	}
+
+	private static void init() {
 		servers = new ArrayList<Server>();
 		ordering = true;
 		// Only one server for this demo
 		servers.add(new Server());
 
-		HashMap<String, Ingredient> ingreidientsList = setUpIngridents();
-		ArrayList<DrinkRecipe> drinks = setUpDrinks(ingreidientsList);
-		ArrayList<Ingredient> condiments = setupExtraIngriedents();
+		ingreidientsList = setUpIngridents();
+		drinks = setUpDrinks(ingreidientsList);
+		condiments = setupExtraIngriedents();
 
+	}
+
+	private static void handleOrdering() {
 		System.out.println("Menu:________________________________");
 
 		Scanner scanny = new Scanner(System.in);
 
-		while (true) {
-			for (int i = 0; i < drinks.size(); i++) {
-				DrinkRecipe cur = drinks.get(i);
-				System.out.println(i + ". " + cur.getName() + "   Ingridients:  " + cur.getIngredientsString());
-			}
-
-			int orderNum = 0;
-			try {
-				System.out.println("______________________________");
-				System.out.println("Enter the number of the drink you want: ");
-				orderNum = Integer.parseInt(scanny.nextLine());
-			}
-
-			catch (Exception e) {
-				System.out.println("Invalid Input");
-			}
-
-			DrinkRecipe order = drinks.get(orderNum);
-
-			ArrayList<Ingredient> added = new ArrayList<Ingredient>();
-			added = condimentOrder(scanny, condiments);
-			System.out.println("I'm back");
-			order.addExtras(added);
-
-			System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
-			servers.get(0).update(order);
+		for (int i = 0; i < drinks.size(); i++) {
+			DrinkRecipe cur = drinks.get(i);
+			System.out.println(i + ". " + cur.getName() + "   Ingridients:  " + cur.getIngredientsString());
 		}
 
-		// Controller.make(order);
+		int orderNum = 0;
+		try {
+			System.out.println("______________________________");
+			System.out.println("Enter the number of the drink you want: ");
+			orderNum = Integer.parseInt(scanny.nextLine());
+		}
+
+		catch (Exception e) {
+			System.out.println("Invalid Input");
+		}
+
+		if (orderNum > drinks.size()) {
+			System.out.println("Invalid Drink Order");
+		}
+
+		DrinkRecipe order = drinks.get(orderNum);
+
+		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
+		added = condimentOrder(scanny, condiments);
+		System.out.println("I'm back");
+		order.addExtras(added);
+
+		System.out.println("You ordered: " + order.getName() + " with " + order.getIngredientsString());
+		servers.get(0).update(order);
 
 	}
 
-//	private static void condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments, boolean first,
-//			ArrayList<Ingredient> added, boolean done) {
-//		while (true) {
-//
-//			if (first) {
-//				System.out.println("Would you like any condiments with your order? Enter 404 to singal you are done.");
-//
-//				for (int i = 0; i < condiments.size(); i++) {
-//					Ingredient cur = condiments.get(i);
-//					System.out.println(i + ". " + cur.getName());
-//				}
-//			} else {
-//				System.out.println("Anything else?");
-//			}
-//
-//			int scarlett = 0;
-//
-//			try {
-//				scarlett = scanny.nextInt();
-//			} catch (Exception e) {
-//				System.out.println("Invalid Order.");
-//				condimentOrder(scanny, condiments, false, added, true);
-//			}
-//
-//			for (int i = 0; i < condiments.size(); i++) {
-//				if (scarlett == i) {
-//					added.add(condiments.get(i));
-//				}
-//			}
-//
-//			if (scarlett == 404) {
-//				System.out.println("404 HELP");
-//				return;
-//			}
-//			condimentOrder(scanny, condiments, false, added, true);
-//
-//		}
-//	}
-
-	
 	private static ArrayList<Ingredient> condimentOrder(Scanner scanny, ArrayList<Ingredient> condiments) {
 		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
-		boolean second = false;
 		boolean pre = false;
 		while (ordering) {
 			if (!pre) {
-				if(!second) {
-					System.out.println("Would you like any condiments with your order? Enter 404 to singal you are done.");
-					System.out.println();
-					for (int i = 0; i < condiments.size(); i++) {
-						Ingredient cur = condiments.get(i);
-						System.out.println(i + ". " + cur.getName());
-					}
-				}else {
-					System.out.println("Would else you like any condiments with your order? Enter 404 to singal you are done.");
-					System.out.println();
-					for (int i = 0; i < condiments.size(); i++) {
-						Ingredient cur = condiments.get(i);
-						System.out.println(i + ". " + cur.getName());
-					}
+				System.out.println("Would you like any condiments with your order? Enter 404 to singal you are done.");
+				System.out.println();
+				for (int i = 0; i < condiments.size(); i++) {
+					Ingredient cur = condiments.get(i);
+					System.out.println(i + ". " + cur.getName());
+
 				}
+
+				pre = true;
+
 			} else {
 				System.out.println("Anything else?");
 			}
@@ -132,23 +99,24 @@ public class Main {
 			} catch (Exception e) {
 				System.out.println("Invalid Order.");
 			}
-			
+
 			for (int i = 0; i < condiments.size(); i++) {
 				if (scarlett == i) {
 					added.add(condiments.get(i));
 				}
 			}
-			
+
 			if (scarlett == 404) {
 				System.out.println("404 HELP");
 				ordering = false;
+				return added;
 			}
 		}
-		ordering = true;//set the true for next ordering simulation
+		ordering = true;// set the true for next ordering simulation
 		System.out.println(added.toString());
 		return added;
 	}
-	
+
 	// Temporary
 	public static void update(String message) {
 		if (message.equals("Ready")) {
@@ -227,7 +195,7 @@ public class Main {
 
 		return drinks;
 	}
-	
+
 	public void JSONSimulation() {
 		Server server = servers.get(0);
 		server.JSONSimulation();
