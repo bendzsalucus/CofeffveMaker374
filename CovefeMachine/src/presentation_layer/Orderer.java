@@ -1,9 +1,14 @@
 package presentation_layer;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+
+import org.json.simple.parser.ParseException;
 
 import business_layer.DrinkRecipe;
 import business_layer.Ingredient;
@@ -18,6 +23,8 @@ public class Orderer {
 	private HashMap<String, Ingredient> ingreidientsList;
 	private ArrayList<DrinkRecipe> drinks;
 	private ArrayList<Ingredient> condiments;
+	private Parsers parser;
+	private ArrayList<Order> orders;
 
 	public Orderer() {
 		init();
@@ -29,6 +36,19 @@ public class Orderer {
 		init();
 		preBuiltOrder(coffee, sentConds);
 
+	}
+
+	public Orderer(String string) throws FileNotFoundException, IOException, ParseException, URISyntaxException {
+		ArrayList<Server> servers = new ArrayList<Server>();
+		Server server = new Server();
+		servers.add(server);
+		parser = new  Parsers();
+		if(string.equals("ParsingJSONFileOrder-inputJSON-test")) {
+			orders = parser.parseOrderInput();
+			for(Order order : orders) {
+				servers.get(0).update(order);
+			}
+		}
 	}
 
 	private void preBuiltOrder(int orderNum, ArrayList<Integer> sentConds) {
@@ -169,9 +189,6 @@ public class Orderer {
 		temp.put("Caramel", (new Ingredient("Caramel", "Sweet Brown Stuff")));
 		temp.put("Cinnamon", (new Ingredient("Cinnamon", "Challenge stuff")));
 		temp.put("Sugar", (new Ingredient("Sugar", "Cane stuff")));
-		temp.put("American Beans", (new Ingredient("American Beans", "Beans grown in America")));
-		temp.put("Brazilian Beans", (new Ingredient("Brazilian Beans", "Beans from Brazil")));
-		temp.put("Amazon Beans", (new Ingredient("Amazon Beans", "Prime Beans")));
 		return temp;
 	}
 
@@ -182,9 +199,9 @@ public class Orderer {
 		extras.add((new Ingredient("Caramel", "Sweet Brown Stuff")));
 		extras.add((new Ingredient("Cinnamon", "Challenge stuff")));
 		extras.add((new Ingredient("Sugar", "Cane stuff")));
-		extras.add((new Ingredient("American Beans", "Beans grown in America")));
-		extras.add((new Ingredient("Brazilian Beans", "Beans from Brazil")));
-		extras.add((new Ingredient("Amazon Beans", "Prime Beans")));
+//		extras.add((new Ingredient("American Beans", "Beans grown in America")));
+//		extras.add((new Ingredient("Brazilian Beans", "Beans from Brazil")));
+//		extras.add((new Ingredient("Amazon Beans", "Prime Beans")));
 		return extras;
 	}
 
@@ -192,17 +209,14 @@ public class Orderer {
 		ArrayList<DrinkRecipe> drinks = new ArrayList<DrinkRecipe>();
 
 		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("American Beans"));
 		drinks.add(new DrinkRecipe("American Black Coffee", temp));
 
 		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("American Beans"));
 		temp.add(ingreidientsList.get("Bark"));
 		temp.add(ingreidientsList.get("Milk"));
 		drinks.add(new DrinkRecipe("Mocha", temp));
 
 		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("American Beans"));
 		temp.add(ingreidientsList.get("Sugar"));
 		temp.add(ingreidientsList.get("Milk"));
 		temp.add(ingreidientsList.get("Bark"));
@@ -218,14 +232,12 @@ public class Orderer {
 		temp.add(ingreidientsList.get("Milk"));
 		temp.add(ingreidientsList.get("Sugar"));
 		temp.add(ingreidientsList.get("Cinnamon"));
-		temp.add(ingreidientsList.get("Amazon Beans"));
 		drinks.add(new DrinkRecipe("Caramel Macchiato", temp));
 
 		temp = new ArrayList<Ingredient>();
 		temp.add(ingreidientsList.get("Milk"));
 		temp.add(ingreidientsList.get("Sugar"));
 		temp.add(ingreidientsList.get("Caramel"));
-		temp.add(ingreidientsList.get("Amazon Beans"));
 		drinks.add(new DrinkRecipe("Doice Skinny Latte", temp));
 
 		return drinks;

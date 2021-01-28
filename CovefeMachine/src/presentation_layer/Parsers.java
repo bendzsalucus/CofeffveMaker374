@@ -68,6 +68,7 @@ public class Parsers {
             	if(comdiments!=null) {
             		Iterator comdimentIterator = comdiments.iterator();
 	            	while(comdimentIterator.hasNext()) {
+	            		System.out.println("here");
 	            		JSONObject comdiment = (JSONObject) comdimentIterator.next();
 		            	int quantity = ((Long) comdiment.get("qty")).intValue();
 		            	String comdimentType = (String) comdiment.get("name");

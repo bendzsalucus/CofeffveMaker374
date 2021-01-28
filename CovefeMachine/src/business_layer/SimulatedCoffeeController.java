@@ -18,7 +18,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	BrewBehavior behavior;
 	String status;
-	DrinkRecipe recipe;
+	DrinkRecipe recipe; // Thread local variables? :(
 	int id;
 	
 	public SimulatedCoffeeController(int id) {
@@ -38,11 +38,11 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		status = "Order Started";
-		coffeeControllerNotice("Started coffee: " + recipe.getName());
+		coffeeControllerNotice("Started coffee: " + order.getDrinkName());
 		behavior.brew(order);
 		
 		status = "Order Ready";
-		coffeeControllerNotice("Dispersed coffee: " + recipe.getName());
+		coffeeControllerNotice("Dispersed coffee: " + order.getDrinkName());
 		notifyObservers();
 	}
 

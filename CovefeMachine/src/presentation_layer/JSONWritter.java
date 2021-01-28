@@ -28,9 +28,9 @@ public class JSONWritter {
 			String DrinkName = order.getDrinkName();
 			String Requesttype = order.getRequesttype();
 			ArrayList<Ingredient> ingredients = order.getIngredients();
-			ingredients.add(new Ingredient("Cream", null));
-			ingredients.add(new Ingredient("Cream", null));
-			ingredients.add(new Ingredient("Sugar", null));
+//			ingredients.add(new Ingredient("Cream", null));
+//			ingredients.add(new Ingredient("Cream", null));
+//			ingredients.add(new Ingredient("Sugar", null));
 			JSONObject command = new JSONObject();
 			JSONObject commandDetail = new JSONObject();
 			commandDetail.put("controller_id", controller_id);
