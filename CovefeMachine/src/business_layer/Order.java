@@ -29,6 +29,7 @@ public class Order {
 //		this.setIngredients(ingredients);
 	} 
 	
+	
 	public void setOrderCompleted() {
 		setCompleted(true);
 	}
@@ -57,6 +58,10 @@ public class Order {
 		ZIP = zIP;
 	}
 
+	public DrinkRecipe getDrinkRecipe() {
+		return this.drinkRecipe;
+	}
+	
 	public String getDrinkName() {
 		return drinkRecipe.getName();
 	}

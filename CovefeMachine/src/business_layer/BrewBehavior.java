@@ -2,5 +2,5 @@ package business_layer;
 
 public interface BrewBehavior {
 	
-	public void brew();
+	public void brew(Order order);
 }

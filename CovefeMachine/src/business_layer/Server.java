@@ -47,7 +47,7 @@ public class Server implements Observer, Subject {
 
 	public void notifyObservers() {
 		for(Observer o: observers) {
-			o.update(processingRecipe);
+			o.update(processingOrder);
 			break;	// Just does the first controller for now
 		}
 	}
@@ -58,7 +58,8 @@ public class Server implements Observer, Subject {
 		Main.update(messageParts[1]);
 	}
 
-	public void update(DrinkRecipe recipe) {
+	public void update(Order order) {
+		DrinkRecipe recipe = order.getDrinkRecipe();
 		this.processingRecipe = recipe;
 		serverNotice("Processing recipe " + recipe.getName());
 		notifyObservers();
