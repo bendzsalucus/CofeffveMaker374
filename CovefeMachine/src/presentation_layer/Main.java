@@ -23,7 +23,7 @@ public class Main {
 	private static ArrayList<Ingredient> condiments;
 
 	public static void main(String[] args) throws InterruptedException {
-		new Orderer();
+//		new Orderer();
 
 		new Orderer(2, new ArrayList<Integer>() {
 			{
@@ -33,32 +33,32 @@ public class Main {
 			}
 		});
 		
-		TimeUnit.SECONDS.sleep(6);
-		System.out.println();
+//		TimeUnit.SECONDS.sleep(6);
+//		System.out.println();
+//		
+//		new Orderer(0, new ArrayList<Integer>() {
+//			{
+//			}
+//		});	
+//		TimeUnit.SECONDS.sleep(6);
+//		System.out.println();
+//		new Orderer(2, new ArrayList<Integer>() {
+//			{
+//				add(4);
+//				add(3);
+//			}
+//		});	
+//		
+//		TimeUnit.SECONDS.sleep(6);
+//		System.out.println();
 		
-		new Orderer(0, new ArrayList<Integer>() {
-			{
-			}
-		});	
-		TimeUnit.SECONDS.sleep(6);
-		System.out.println();
-		new Orderer(2, new ArrayList<Integer>() {
-			{
-				add(4);
-				add(3);
-			}
-		});	
-		
-		TimeUnit.SECONDS.sleep(6);
-		System.out.println();
-		
-		try {
-			new Orderer("ParsingJSONFileOrder-inputJSON-test");
-		} catch (IOException | ParseException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		try {
+//			new Orderer("ParsingJSONFileOrder-inputJSON-test");
+//		} catch (IOException | ParseException | URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 	}
 
 }

@@ -55,7 +55,7 @@ public class Orderer {
 
 		DrinkRecipe drinkRecipe = drinks.get(orderNum);
 //		System.out.println(drinkRecipe.getName());
-		Order order = new Order(22, "5500 WABASH AVE", 47803, drinkRecipe);
+		Order order = new Order(3, "5500 WABASH AVE", 47803, drinkRecipe);
 
 		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
 
@@ -243,9 +243,9 @@ public class Orderer {
 		return drinks;
 	}
 
-	public void JSONSimulation() {
-		Server server = servers.get(0);
-		server.JSONSimulation();
-	}
+//	public void JSONSimulation() {
+//		Server server = servers.get(0);
+//		server.JSONSimulation();
+//	}
 
 }

@@ -62,4 +62,10 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 		
 	}
 
+	@Override
+	public void updateOrder(OrderConResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

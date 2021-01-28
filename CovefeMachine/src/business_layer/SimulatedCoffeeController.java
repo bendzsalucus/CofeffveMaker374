@@ -39,18 +39,22 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 //	}
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
+		System.out.println();
 		status = "Order Started";
 		coffeeControllerNotice("Started coffee: " + order.getDrinkName());
 		ArrayList<OrderConResponse> responses = behavior.brew(order);
+		System.out.println();
 		for(OrderConResponse response: responses) {
 			server.updateOrder(response);
 		}
 		
 		if(order.getStatus()==0) {
-			status = "Order Ready";
+			System.out.println("[Controller Response] Brewed");
+			status = "Coffee Ready "+ order.getCoffee_machine_id();
 		}else {
 			if(order.getErrorcode()==26) {
 				((Server) server).brewWithAnotherMachine(order);
+				System.out.println("[Controller Response] Brewing with another machine...");
 //				behavior.brew(order);
 			}
 
@@ -61,7 +65,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 //				
 //			}Adding more errors from coffee machine that leads to cancelling the orders
 		}
-		coffeeControllerNotice("Dispersed coffee: " + order.getDrinkName());
+//		coffeeControllerNotice("Dispersed coffee: " + order.getDrinkName());
 		notifyObservers();
 	}
 
@@ -108,7 +112,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 
 	@Override
 	public void updateOrder(OrderConResponse response) {
-		//this is just lazy method for not making the subject and observer more specific for the different sevreSubject or controllerSubjet
+		//this is just method for not making the subject and observer more specific for the different sevreSubject or controllerSubjet
 		//all methods are in the same interface for convince.
 		
 	}

@@ -105,7 +105,7 @@ public class Parsers {
 //		File asFile = new File(asLocation);
         JSONParser parser = new JSONParser();
         try (Reader reader = new FileReader(asLocation)) {
-        	System.out.println("[controller response] Parsing Starts");
+        	System.out.println("[controller response] Parsering response from controller");
             JSONArray jsonObject = (JSONArray) parser.parse(reader);
             Iterator i = jsonObject.iterator();
 //            String name = (String) jsonObject.get(1);
@@ -119,16 +119,17 @@ public class Parsers {
             	if((Long) controllerResponse.get("errorcode")!= null) {
                 	errorcode = ((Long) controllerResponse.get("errorcode")).intValue();
             	}
-            	System.out.println(orderID+" "+ status +" "+ errordesc +" "+ errorcode);
+//            	System.out.println(orderID+" "+ status +" "+ errordesc +" "+ errorcode);
             	
             	//updateOrder trigger the update method in server class with response from the controller 
             	//return int, int, string, int; last two could be null
             	OrderConResponse orderResposne = new OrderConResponse(orderID, status, errordesc, errorcode);
             	responses.add(orderResposne);
+//            	System.out.println(orderResposne.getOrderID());
 //            	((Server) server).updateOrder(orderID, status, errordesc, errorcode);
             }
 	}
-        System.out.println("[order-input] Parsing Done");
+        System.out.println("[controller response] Send responses to server");
         return responses;
 }
 	

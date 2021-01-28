@@ -24,6 +24,7 @@ public class Server implements Observer, Subject {
 		parser = new Parsers();
 		entries = new HashMap<String, Object>();
 		observers = new ArrayList<Observer>();
+		orders = new ArrayList<Order>();
 		// Temp
 		SimulatedCoffeeController c0 = new SimulatedCoffeeController(0);
 		SimulatedCoffeeController c1 = new SimulatedCoffeeController(1);
@@ -60,6 +61,7 @@ public class Server implements Observer, Subject {
 
 	public void update(Order order) {
 		DrinkRecipe recipe = order.getDrinkRecipe();
+		orders.add(order);
 		this.processingOrder = order;
 		this.processingRecipe = recipe;
 		serverNotice("Processing recipe " + recipe.getName());
@@ -77,13 +79,13 @@ public class Server implements Observer, Subject {
 				if(response.getOrderID() == 0) {
 					//status 0 means done
 					currentOrder.setOrderCompleted();
-					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ "is ready. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
+					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ " is ready. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
 					//TODO sendUserResonse with JSON
 				}else {
 					//status 1 
 					currentOrder.setErrorcode(response.getErrorcode());
 					currentOrder.setErrordesc(response.getErrordesc());
-					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ "fail to brew. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
+					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ " fail to brew. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
 					//TODO sendUserResonse with JSON
 //					e.g. 
 //					"user-response": {
@@ -100,26 +102,26 @@ public class Server implements Observer, Subject {
 		
 	}
 
-	public void JSONSimulation() {
-		ArrayList<Order> JSONOrders = new ArrayList<Order>();
-		//simulating receiving the order from Mobile phone with a JSON order file sending in
-		//Generate a list of order
-		try {
-			JSONOrders = parser.parseOrderInput();
-		} catch (IOException | ParseException | URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("[JSONSimulation] Bad parsing");
-		}
-		
-		for(Order order : JSONOrders) {
-			orders.add(order);
-			System.out.println("[JSONSimulation] Order Recieve. OrderID: " + order.getOrderID());
-		}
-		
-		//TODO orders are bunch of orders need to send to controller to brew
-		// Order has a lot of info including drinkName, e.g. Americano, comdiments - ArrayList<Ingredient>
-	}
+//	public void JSONSimulation() {
+//		ArrayList<Order> JSONOrders = new ArrayList<Order>();
+//		//simulating receiving the order from Mobile phone with a JSON order file sending in
+//		//Generate a list of order
+//		try {
+//			JSONOrders = parser.parseOrderInput();
+//		} catch (IOException | ParseException | URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println("[JSONSimulation] Bad parsing");
+//		}
+//		
+//		for(Order order : JSONOrders) {
+//			orders.add(order);
+//			System.out.println("[JSONSimulation] Order Recieve. OrderID: " + order.getOrderID());
+//		}
+//		
+//		//TODO orders are bunch of orders need to send to controller to brew
+//		// Order has a lot of info including drinkName, e.g. Americano, comdiments - ArrayList<Ingredient>
+//	}
 
 	public void brewWithAnotherMachine(Order order) {
 		changeCoffeeMachineID(order);
