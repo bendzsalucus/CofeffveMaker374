@@ -89,7 +89,7 @@ public class Parsers {
 		return newOrders;
 }
 	
-	public void parseControllerResponse(Observer server) throws FileNotFoundException, IOException, ParseException, URISyntaxException{
+	public ArrayList<OrderConResponse> parseControllerResponse() throws FileNotFoundException, IOException, ParseException, URISyntaxException{
 
 		int errorcode = -99;
 		String jarLoc;
@@ -101,7 +101,7 @@ public class Parsers {
 			containerLoc += path[i];
 			containerLoc += "\\";
 		}
-		
+		ArrayList<OrderConResponse> responses = new ArrayList<OrderConResponse>();
 		String asLocation = containerLoc.concat(jsonFileName);
 //		File asFile = new File(asLocation);
         JSONParser parser = new JSONParser();
@@ -124,11 +124,13 @@ public class Parsers {
             	
             	//updateOrder trigger the update method in server class with response from the controller 
             	//return int, int, string, int; last two could be null
-            	((Server) server).updateOrder(orderID, status, errordesc, errorcode);
+            	OrderConResponse orderResposne = new OrderConResponse(orderID, status, errordesc, errorcode);
+            	responses.add(orderResposne);
+//            	((Server) server).updateOrder(orderID, status, errordesc, errorcode);
             }
 	}
         System.out.println("[order-input] Parsing Done");
-   
+        return responses;
 }
 	
 	

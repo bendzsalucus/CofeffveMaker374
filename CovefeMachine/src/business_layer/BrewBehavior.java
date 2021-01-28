@@ -1,6 +1,10 @@
 package business_layer;
 
+import java.util.ArrayList;
+
+import presentation_layer.OrderConResponse;
+
 public interface BrewBehavior {
 	
-	public void brew(Order order);
+	public ArrayList<OrderConResponse> brew(Order order);
 }

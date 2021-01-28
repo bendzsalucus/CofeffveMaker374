@@ -70,20 +70,20 @@ public class Server implements Observer, Subject {
 		System.out.println("\u001B[33mServer: " + message + "\u001B[0m");
 	}
 
-	public void updateOrder(int orderID, int status, String errordesc, int errorcode) {
+	public void updateOrder(OrderConResponse response) {
     	//updateOrder updates the order with response from the controllers.
 		for(Order currentOrder: orders) {
-			if(currentOrder.getOrderID() == orderID) {
-				if(status == 0) {
+			if(currentOrder.getOrderID() == response.getOrderID()) {
+				if(response.getOrderID() == 0) {
 					//status 0 means done
 					currentOrder.setOrderCompleted();
-					System.out.println("[JSONSimulation-Controller] OrderID: "+orderID+ "is ready. Errorcode: "+errorcode +" Error describtion: "+errordesc);
+					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ "is ready. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
 					//TODO sendUserResonse with JSON
 				}else {
 					//status 1 
-					currentOrder.setErrorcode(errorcode);
-					currentOrder.setErrordesc(errordesc);
-					System.out.println("[JSONSimulation-Controller] OrderID: "+orderID+ "fail to brew. Errorcode: "+errorcode +" Error describtion: "+errordesc);
+					currentOrder.setErrorcode(response.getErrorcode());
+					currentOrder.setErrordesc(response.getErrordesc());
+					System.out.println("[JSONSimulation-Controller] OrderID: "+response.getOrderID()+ "fail to brew. Errorcode: "+response.getErrorcode() +" Error describtion: "+response.getErrordesc());
 					//TODO sendUserResonse with JSON
 //					e.g. 
 //					"user-response": {
@@ -119,6 +119,15 @@ public class Server implements Observer, Subject {
 		
 		//TODO orders are bunch of orders need to send to controller to brew
 		// Order has a lot of info including drinkName, e.g. Americano, comdiments - ArrayList<Ingredient>
+	}
+
+	public void brewWithAnotherMachine(Order order) {
+		changeCoffeeMachineID(order);
+	}
+
+	private void changeCoffeeMachineID(Order order) {
+		int new_coffee_machine_id = order.getCoffee_machine_id()+1;
+		order.setCoffee_machine_id(new_coffee_machine_id);
 	}
 
 }
