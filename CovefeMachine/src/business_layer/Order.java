@@ -29,6 +29,16 @@ public class Order {
 //		this.setIngredients(ingredients);
 	} 
 	
+	public Order(int orderID, String street, int ZIP, DrinkRecipe drinkRecipe) {
+		setCompleted(false);
+		this.setOrderID(orderID);
+		this.setStreet(street);
+		this.setZIP(ZIP);
+		this.drinkRecipe = drinkRecipe;
+//		this.setDrinkName(drinkName);
+//		this.setIngredients(ingredients);
+	} 
+	
 	
 	public void setOrderCompleted() {
 		setCompleted(true);
