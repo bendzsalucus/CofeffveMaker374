@@ -14,6 +14,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	Observer server;
 	Parsers parser;
+	Order order;
 	
 	BrewBehavior behavior;
 	String status;
@@ -38,7 +39,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		status = "Order Started";
 		coffeeControllerNotice("Started coffee: " + recipe.getName());
-		behavior.brew();
+		behavior.brew(order);
 		
 		status = "Order Ready";
 		coffeeControllerNotice("Dispersed coffee: " + recipe.getName());
@@ -67,6 +68,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	public void update(String message) {}
 	
 	public void update(Order order) {
+		this.order = order;
 		this.recipe = order.getDrinkRecipe();
         Thread t = new Thread(this);
         t.start();
