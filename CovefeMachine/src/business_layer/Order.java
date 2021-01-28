@@ -17,14 +17,16 @@ public class Order {
 	private int coffee_machine_id;
 	private int controller_id;
 	private String Requesttype;
+	private DrinkRecipe drinkRecipe;
 	
 	public Order(int orderID, String street, int ZIP, String drinkName, ArrayList<Ingredient> ingredients) {
 		setCompleted(false);
 		this.setOrderID(orderID);
 		this.setStreet(street);
 		this.setZIP(ZIP);
-		this.setDrinkName(drinkName);
-		this.setIngredients(ingredients);
+		this.drinkRecipe = new DrinkRecipe(drinkName, ingredients);
+//		this.setDrinkName(drinkName);
+//		this.setIngredients(ingredients);
 	} 
 	
 	public void setOrderCompleted() {
@@ -56,19 +58,19 @@ public class Order {
 	}
 
 	public String getDrinkName() {
-		return drinkName;
+		return drinkRecipe.getName();
 	}
 
 	public void setDrinkName(String drinkName) {
-		this.drinkName = drinkName;
+		this.drinkRecipe.name = drinkName;
 	}
 
 	public ArrayList<Ingredient> getIngredients() {
-		return ingredients;
+		return this.drinkRecipe.getIngredients();
 	}
 
 	public void setIngredients(ArrayList<Ingredient> ingredients) {
-		this.ingredients = ingredients;
+		this.drinkRecipe.ingredients = ingredients;
 	}
 
 	public boolean isCompleted() {
