@@ -19,20 +19,41 @@ public abstract class Ingredient {
 		return this.description;
 	}
 
-	public abstract void setWrappee(Ingredient i);
+	public abstract void nextIngredient(Ingredient i);
 
-	public void initialPrint() {
+	public void getProcessString() {
 		if (this.wrappee != null){
-			System.out.println(this.wrappee.doThisPrint());
+			System.out.println(this.wrappee.processName());
 			}
 		System.out.println(this.getName());
 
 	}
+	
+//	 "command": {
+//	    "controller_id": 2,
+//	    "coffee_machine_id": 1,
+//	    "orderID": 1,
+//	    "DrinkName": "Large Latte",
+//	    "Requesttype": "Programmable",
+//	    "Options:": [
+//	        {"Name": "hazelnut", "qty": 4}
+//	    ]
+//	    "Recipe": [
+//	        {"commandstep": "steam", "object": "milk"},
+//	        {"commandstep": "steam", "object": "milk"},
+//	        {"commandstep": "add", "object": "expresso"},
+//	        {"commandstep": "add", "object": "expresso"},
+//	        {"commandstep": "mix"},
+//	        {"commandstep": "top", "object": "whipped cream"}
+//	    ]
+//	}
+	
+	
 
-	private String doThisPrint() {
+	private String processName() {
 		if (this.wrappee != null){
-			return wrappee.getName();}
-		return null; 
+			return wrappee.processName() + this.getName();}
+		return this.getName(); 
 		
 	}
 
@@ -43,7 +64,7 @@ public abstract class Ingredient {
 		}
 
 		@Override
-		public void setWrappee(Ingredient i) {
+		public void nextIngredient(Ingredient i) {
 			super.wrappee = i;
 
 		}
@@ -57,7 +78,7 @@ public abstract class Ingredient {
 		}
 
 		@Override
-		public void setWrappee(Ingredient i) {
+		public void nextIngredient(Ingredient i) {
 			super.wrappee = i;
 
 		}
@@ -71,7 +92,7 @@ public abstract class Ingredient {
 		}
 
 		@Override
-		public void setWrappee(Ingredient i) {
+		public void nextIngredient(Ingredient i) {
 			super.wrappee = i;
 
 		}
@@ -85,7 +106,7 @@ public abstract class Ingredient {
 		}
 
 		@Override
-		public void setWrappee(Ingredient i) {
+		public void nextIngredient(Ingredient i) {
 			super.wrappee = i;
 
 		}
@@ -99,7 +120,7 @@ public abstract class Ingredient {
 		}
 
 		@Override
-		public void setWrappee(Ingredient i) {
+		public void nextIngredient(Ingredient i) {
 			super.wrappee = i;
 
 		}
