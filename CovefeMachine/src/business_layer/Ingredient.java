@@ -1,11 +1,10 @@
 package business_layer;
 
-import java.util.ArrayList;
-
 public class Ingredient {
 
 	private String name;
 	private String description;
+	private Ingredient wrappee; 
 
 	public Ingredient(String name, String desciption) {
 		this.name = name;
