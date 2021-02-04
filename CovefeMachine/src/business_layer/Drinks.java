@@ -16,6 +16,7 @@ public class Drinks {
 		this.drinklist.add(new CaramelMacchiato());
 		this.drinklist.add(new DoiceSkinnyLatte());
 		this.drinklist.add(new AmericanBlack());
+		this.drinklist.add(new RegularLatte());
 
 		// MOVE ME INTO DRINKS. Sitting here cause modifications happening in drinks.
 		this.ingridients = new ArrayList<Ingredient>();
@@ -39,6 +40,12 @@ public class Drinks {
 class ScarlettSurprise extends DrinkRecipe {
 	public ScarlettSurprise() {
 		super("Scarlett Surprise", new ArrayList<Ingredient>(Arrays.asList(new Sugar(), new Milk(), new Bark())));
+	}
+}
+
+class RegularLatte extends DrinkRecipe{
+	public RegularLatte() {
+		super("Regular Latte", null);
 	}
 }
 

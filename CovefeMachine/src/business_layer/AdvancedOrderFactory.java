@@ -1,6 +1,6 @@
 package business_layer;
 
-public class ProgrammableFactory extends AbstractFactory {
+public class AdvancedOrderFactory extends AbstractFactory {
 
 	@Override
 	public DrinkRecipe coffeeRecipe(String chanelle) {

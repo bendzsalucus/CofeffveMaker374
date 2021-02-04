@@ -6,10 +6,19 @@ public class DrinkRecipe {
 
 	ArrayList<Ingredient> ingredients;
 	String name;
+	private DrinkRecipe wrapeeingredient;
 
 	public DrinkRecipe(String name, ArrayList<Ingredient> ingrideints) {
 		this.name = name;
 		this.ingredients = ingrideints;
+		this.wrapeeingredient = null;
+	}
+
+	public DrinkRecipe(DrinkRecipe recipe, Ingredient ingridient) {
+		this.name = recipe.name;
+		this.ingredients = recipe.ingredients;
+		this.ingredients.add(ingridient);
+		this.wrapeeingredient = recipe;
 	}
 
 	public String getName() {
@@ -35,5 +44,12 @@ public class DrinkRecipe {
 		ingredients.addAll(added);
 	}
 
-}
+	public String test() {
+		if(wrapeeingredient!=null) {
+			return name + " "+ wrapeeingredient.getName();
+		}else {
+			return name;
+		}
+	}
 
+}

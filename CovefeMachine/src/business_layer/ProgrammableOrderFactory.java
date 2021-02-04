@@ -1,6 +1,6 @@
 package business_layer;
 
-public class AdvancedFactory extends AbstractFactory {
+public class ProgrammableOrderFactory extends AbstractFactory {
 
 	@Override
 	public DrinkRecipe coffeeRecipe(String chanelle) {
@@ -14,7 +14,10 @@ public class AdvancedFactory extends AbstractFactory {
 			return new Mocha();
 		} else if (chanelle.equals("DoiceSkinnyLatte")) {
 			return new DoiceSkinnyLatte();
-		} else {
+		} else if(chanelle.equals("Regular Latte")) {
+			return new RegularLatte();
+		}
+		else {
 			return new AmericanBlack();
 		}
 	}

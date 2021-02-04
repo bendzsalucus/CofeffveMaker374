@@ -14,7 +14,7 @@ import business_layer.DrinkRecipe;
 import business_layer.Drinks;
 import business_layer.Ingredient;
 import business_layer.Order;
-import business_layer.ProgrammableFactory;
+import business_layer.ProgrammableOrderFactory;
 import business_layer.Server;
 
 public class Orderer {
@@ -27,7 +27,7 @@ public class Orderer {
 	private ArrayList<Ingredient> condiments;
 	private Parsers parser;
 	private ArrayList<Order> orders;
-	private ProgrammableFactory programmablefactory;
+	private ProgrammableOrderFactory programmablefactory;
 
 	public Orderer() {
 		init();
@@ -59,11 +59,13 @@ public class Orderer {
 		DrinkRecipe drinkRecipe = programmablefactory.coffeeRecipe(chanelle);
 		Order order = new Order(3, "5500 WABASH AVE", 47803, drinkRecipe);
 
-//		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
+		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
 
-//		for (int i = 0; i < sentConds.size(); i++) {
-//			added.add(condiments.get(sentConds.get(i)));
-//		}
+		for (int i = 0; i < sentConds.size(); i++) {
+			drinkRecipe = new DrinkRecipe(drinkRecipe, ingreidientsList.get(sentConds.get(i)));
+		}
+//		System.out.println("Here~~~~~");
+//		System.out.println(drinkRecipe.test());
 
 //		drinkRecipe.addExtras(added);
 
@@ -81,7 +83,7 @@ public class Orderer {
 		// Only one server for this demo
 		servers.add(new Server());
 
-		this.programmablefactory = new ProgrammableFactory();
+		this.programmablefactory = new ProgrammableOrderFactory();
 		this.drinks = new Drinks().getDrinkList();
 		this.ingreidientsList = new Drinks().getIngridients();
 	}

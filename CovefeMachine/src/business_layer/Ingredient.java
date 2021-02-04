@@ -56,74 +56,75 @@ public abstract class Ingredient {
 		return this.getName(); 
 		
 	}
+}
 
-	class Bark extends Ingredient {
 
-		public Bark() {
-			super("Bark", "Chocolate Goodness.");
-		}
+class Bark extends Ingredient {
 
-		@Override
-		public void nextIngredient(Ingredient i) {
-			super.wrappee = i;
+	public Bark() {
+		super("Bark", "Chocolate Goodness.");
+	}
 
-		}
+	@Override
+	public void nextIngredient(Ingredient i) {
+		super.wrappee = i;
 
 	}
 
-	class Milk extends Ingredient {
+}
 
-		public Milk() {
-			super("Milk", "Comes from a cow.");
-		}
+class Milk extends Ingredient {
 
-		@Override
-		public void nextIngredient(Ingredient i) {
-			super.wrappee = i;
+	public Milk() {
+		super("Milk", "Comes from a cow.");
+	}
 
-		}
+	@Override
+	public void nextIngredient(Ingredient i) {
+		super.wrappee = i;
 
 	}
 
-	class Caramel extends Ingredient {
+}
 
-		public Caramel() {
-			super("Caramel", "Sweet brown goodness.");
-		}
+class Caramel extends Ingredient {
 
-		@Override
-		public void nextIngredient(Ingredient i) {
-			super.wrappee = i;
+	public Caramel() {
+		super("Caramel", "Sweet brown goodness.");
+	}
 
-		}
+	@Override
+	public void nextIngredient(Ingredient i) {
+		super.wrappee = i;
 
 	}
 
-	class Cinnamon extends Ingredient {
+}
 
-		public Cinnamon() {
-			super("Cinnamon", "Challenge stuff.");
-		}
+class Cinnamon extends Ingredient {
 
-		@Override
-		public void nextIngredient(Ingredient i) {
-			super.wrappee = i;
+	public Cinnamon() {
+		super("Cinnamon", "Challenge stuff.");
+	}
 
-		}
+	@Override
+	public void nextIngredient(Ingredient i) {
+		super.wrappee = i;
 
 	}
 
-	class Sugar extends Ingredient {
+}
 
-		public Sugar() {
-			super("Sugar", "Sweeeeeeeet. Made from cane.");
-		}
+class Sugar extends Ingredient {
 
-		@Override
-		public void nextIngredient(Ingredient i) {
-			super.wrappee = i;
+	public Sugar() {
+		super("Sugar", "Sweeeeeeeet. Made from cane.");
+	}
 
-		}
+	@Override
+	public void nextIngredient(Ingredient i) {
+		super.wrappee = i;
 
 	}
+
 }
