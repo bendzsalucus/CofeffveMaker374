@@ -11,8 +11,10 @@ import java.util.Scanner;
 import org.json.simple.parser.ParseException;
 
 import business_layer.DrinkRecipe;
+import business_layer.Drinks;
 import business_layer.Ingredient;
 import business_layer.Order;
+import business_layer.ProgrammableFactory;
 import business_layer.Server;
 
 public class Orderer {
@@ -20,11 +22,12 @@ public class Orderer {
 	static ArrayList<Server> servers;
 	static ArrayList<SimulatedMobileDevice> mobileApps;
 	boolean ordering;
-	private HashMap<String, Ingredient> ingreidientsList;
+	private ArrayList<Ingredient> ingreidientsList;
 	private ArrayList<DrinkRecipe> drinks;
 	private ArrayList<Ingredient> condiments;
 	private Parsers parser;
 	private ArrayList<Order> orders;
+	private ProgrammableFactory programmablefactory;
 
 	public Orderer() {
 		init();
@@ -32,7 +35,7 @@ public class Orderer {
 
 	}
 
-	public Orderer(int coffee, ArrayList<Integer> sentConds) {
+	public Orderer(String coffee, ArrayList<Integer> sentConds) {
 		init();
 		preBuiltOrder(coffee, sentConds);
 
@@ -42,29 +45,27 @@ public class Orderer {
 		ArrayList<Server> servers = new ArrayList<Server>();
 		Server server = new Server();
 		servers.add(server);
-		parser = new  Parsers();
-		if(string.equals("ParsingJSONFileOrder-inputJSON-test")) {
+		parser = new Parsers();
+		if (string.equals("ParsingJSONFileOrder-inputJSON-test")) {
 			orders = parser.parseOrderInput();
-			for(Order order : orders) {
+			for (Order order : orders) {
 				servers.get(0).update(order);
 			}
 		}
 	}
 
-	private void preBuiltOrder(int orderNum, ArrayList<Integer> sentConds) {
+	private void preBuiltOrder(String chanelle, ArrayList<Integer> sentConds) {
 
-		DrinkRecipe drinkRecipe = drinks.get(orderNum);
-//		System.out.println(drinkRecipe.getName());
+		DrinkRecipe drinkRecipe = programmablefactory.coffeeRecipe(chanelle);
 		Order order = new Order(3, "5500 WABASH AVE", 47803, drinkRecipe);
 
-		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
+//		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
 
-		for (int i = 0; i < sentConds.size(); i++) {
-			added.add(condiments.get(sentConds.get(i)));
-//			System.out.println("here");
-		}
+//		for (int i = 0; i < sentConds.size(); i++) {
+//			added.add(condiments.get(sentConds.get(i)));
+//		}
 
-		drinkRecipe.addExtras(added);
+//		drinkRecipe.addExtras(added);
 
 		System.out.println("You ordered: " + drinkRecipe.getName() + " with " + drinkRecipe.getIngredientsString());
 //		System.out.println(order.getOrderID());
@@ -80,10 +81,9 @@ public class Orderer {
 		// Only one server for this demo
 		servers.add(new Server());
 
-		ingreidientsList = setUpIngridents();
-		drinks = setUpDrinks(ingreidientsList);
-		condiments = setupExtraIngriedents();
-
+		this.programmablefactory = new ProgrammableFactory();
+		this.drinks = new Drinks().getDrinkList();
+		this.ingreidientsList = new Drinks().getIngridients();
 	}
 
 	private void handleOrdering(boolean firstOrder, Scanner scanny) {
@@ -113,7 +113,7 @@ public class Orderer {
 		}
 		DrinkRecipe drinkRecipe = drinks.get(orderNum);
 		Random r = new Random();
-		int randomOrderID = r.nextInt() *1000 * r.nextInt();
+		int randomOrderID = r.nextInt() * 1000 * r.nextInt();
 		Order order = new Order(randomOrderID, "5500 WABASH AVE", 47803, drinkRecipe);
 
 		ArrayList<Ingredient> added = new ArrayList<Ingredient>();
@@ -180,67 +180,6 @@ public class Orderer {
 			System.out.println("Your Order wasn't processed properly.");
 		}
 
-	}
-
-	private HashMap<String, Ingredient> setUpIngridents() {
-		HashMap<String, Ingredient> temp = new HashMap<String, Ingredient>();
-		temp.put("Milk", (new Ingredient("Milk", "Cow stuff")));
-		temp.put("Bark", (new Ingredient("Bark", "Tree stuff")));
-		temp.put("Caramel", (new Ingredient("Caramel", "Sweet Brown Stuff")));
-		temp.put("Cinnamon", (new Ingredient("Cinnamon", "Challenge stuff")));
-		temp.put("Sugar", (new Ingredient("Sugar", "Cane stuff")));
-		return temp;
-	}
-
-	private ArrayList<Ingredient> setupExtraIngriedents() {
-		ArrayList<Ingredient> extras = new ArrayList<Ingredient>();
-		extras.add((new Ingredient("Milk", "Cow stuff")));
-		extras.add((new Ingredient("Bark", "Tree stuff")));
-		extras.add((new Ingredient("Caramel", "Sweet Brown Stuff")));
-		extras.add((new Ingredient("Cinnamon", "Challenge stuff")));
-		extras.add((new Ingredient("Sugar", "Cane stuff")));
-//		extras.add((new Ingredient("American Beans", "Beans grown in America")));
-//		extras.add((new Ingredient("Brazilian Beans", "Beans from Brazil")));
-//		extras.add((new Ingredient("Amazon Beans", "Prime Beans")));
-		return extras;
-	}
-
-	private ArrayList<DrinkRecipe> setUpDrinks(HashMap<String, Ingredient> ingreidientsList) {
-		ArrayList<DrinkRecipe> drinks = new ArrayList<DrinkRecipe>();
-
-		ArrayList<Ingredient> temp = new ArrayList<Ingredient>();
-		drinks.add(new DrinkRecipe("American Black Coffee", temp));
-
-		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("Bark"));
-		temp.add(ingreidientsList.get("Milk"));
-		drinks.add(new DrinkRecipe("Mocha", temp));
-
-		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("Sugar"));
-		temp.add(ingreidientsList.get("Milk"));
-		temp.add(ingreidientsList.get("Bark"));
-		drinks.add(new DrinkRecipe("Scarlett Surprise", temp));
-
-		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("Milk"));
-		temp.add(ingreidientsList.get("Sugar"));
-		temp.add(ingreidientsList.get("Cinnamon"));
-		drinks.add(new DrinkRecipe("Cold Brew", temp));
-
-		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("Milk"));
-		temp.add(ingreidientsList.get("Sugar"));
-		temp.add(ingreidientsList.get("Cinnamon"));
-		drinks.add(new DrinkRecipe("Caramel Macchiato", temp));
-
-		temp = new ArrayList<Ingredient>();
-		temp.add(ingreidientsList.get("Milk"));
-		temp.add(ingreidientsList.get("Sugar"));
-		temp.add(ingreidientsList.get("Caramel"));
-		drinks.add(new DrinkRecipe("Doice Skinny Latte", temp));
-
-		return drinks;
 	}
 
 //	public void JSONSimulation() {

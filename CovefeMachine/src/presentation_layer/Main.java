@@ -19,14 +19,14 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 //		new Orderer();
 
-		new Orderer(2, new ArrayList<Integer>() {
+		new Orderer("ScarlettSurprise", new ArrayList<Integer>() {
 			{
 				add(0);
 				add(0);
 				add(2);
 			}
 		});
-		
+
 //		TimeUnit.SECONDS.sleep(6);
 //		System.out.println();
 //		
@@ -45,7 +45,7 @@ public class Main {
 //		
 //		TimeUnit.SECONDS.sleep(6);
 //		System.out.println();
-		
+
 //		try {
 //			new Orderer("ParsingJSONFileOrder-inputJSON-test");
 //		} catch (IOException | ParseException | URISyntaxException e) {
