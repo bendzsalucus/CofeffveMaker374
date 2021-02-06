@@ -45,3 +45,22 @@
             ]
             }
 }
+//This is JSON order input format for UC4
+{
+  "order": { "orderID": 5,
+            "address": {
+                  "street": "3 N. Walnut",
+                  "ZIP": 47801
+            },
+            "drink": "Recipe Drink",
+            "condiments": [
+                {"name": "Hazelnut", "qty": 2}
+            ],
+            "Recipe": [
+				{"commandstep": "add", "object": "expresso"},
+				{"commandstep": "add", "object": "expresso"},
+				{"commandstep": "add", "object": "expresso"},
+				{"commandstep": "add", "object": "water"},
+				{"commandstep": "mix"}
+			]
+}

@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import business_layer.Ingredient;
+import business_layer.Condiment;
 import business_layer.Order;
 import business_layer.Server;
 import interfaces.Observer;
@@ -63,7 +63,7 @@ public class Parsers {
             	
             	//condiments
             	JSONArray comdiments = (JSONArray) orderDetail.get("condiments");
-            	ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+            	ArrayList<Condiment> ingredients = new ArrayList<Condiment>();
             	if(comdiments!=null) {
             		Iterator comdimentIterator = comdiments.iterator();
 	            	while(comdimentIterator.hasNext()) {
@@ -72,7 +72,7 @@ public class Parsers {
 		            	int quantity = ((Long) comdiment.get("qty")).intValue();
 		            	String comdimentType = (String) comdiment.get("name");
 		            	for(int j = 0; j <quantity; j++) {
-			            	ingredients.add(new Ingredient(comdimentType, null));
+			            	ingredients.add(new Condiment(comdimentType, null));
 		            	}
 	            	}
             		System.out.println(ingredients);

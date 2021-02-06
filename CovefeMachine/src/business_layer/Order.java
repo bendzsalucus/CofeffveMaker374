@@ -3,44 +3,20 @@ package business_layer;
 import java.util.ArrayList;
 
 
-public class Order {
+public abstract class Order {
 	
-	private int orderID;
-	private String street;
-	private int ZIP;
-	private String drinkName;
-	private ArrayList<Ingredient> ingredients;
-	private boolean completed;
-	private int status;
-	private String errordesc;
-	private int errorcode;
-	private int coffee_machine_id;
-	private int controller_id;
-	private String Requesttype;
-	private DrinkRecipe drinkRecipe;
-	
-	public Order(int orderID, String street, int ZIP, String drinkName, ArrayList<Ingredient> ingredients) {
-		setCompleted(false);
-		this.setOrderID(orderID);
-		this.setStreet(street);
-		this.setZIP(ZIP);
-		this.drinkRecipe = new DrinkRecipe(drinkName, ingredients);
-//		this.setDrinkName(drinkName);
-//		this.setIngredients(ingredients);
-	} 
-	
-	public Order(int orderID, String street, int ZIP, DrinkRecipe drinkRecipe) {
-		setCompleted(false);
-		this.setOrderID(orderID);
-		this.setStreet(street);
-		this.setZIP(ZIP);
-		this.drinkRecipe = drinkRecipe;
-//		System.out.println(drinkRecipe.getName());
-//		this.setDrinkName(drinkName);
-//		this.setIngredients(ingredients);
-	} 
-	
-	
+	int orderID = -999;
+	String street = "Unknown street";
+	int ZIP = -999;
+	boolean completed = false;
+	String errordesc = "Unknown error description";
+	int errorcode = -999;
+	int coffee_machine_id = -999;
+	int controller_id = -999;
+	String Requesttype = "Unknown type";
+	Drink drink;
+
+
 	public void setOrderCompleted() {
 		setCompleted(true);
 	}
@@ -69,24 +45,16 @@ public class Order {
 		ZIP = zIP;
 	}
 
-	public DrinkRecipe getDrinkRecipe() {
-		return this.drinkRecipe;
+	public Drink getDrink() {
+		return this.drink;
 	}
 	
 	public String getDrinkName() {
-		return drinkRecipe.getName();
+		return drink.getDrinkName();
 	}
 
-	public void setDrinkName(String drinkName) {
-		this.drinkRecipe.name = drinkName;
-	}
-
-	public ArrayList<Ingredient> getIngredients() {
-		return this.drinkRecipe.getIngredients();
-	}
-
-	public void setIngredients(ArrayList<Ingredient> ingredients) {
-		this.drinkRecipe.ingredients = ingredients;
+	public void setIngredients(ArrayList<Condiment> ingredients) {
+		this.drink.condiments = ingredients;
 	}
 
 	public boolean isCompleted() {
@@ -137,10 +105,10 @@ public class Order {
 		return Requesttype;
 	}
 
-	public void setRequesttype(String requesttype) {
-		Requesttype = requesttype;
-	}
-
+//	public void setRequesttype(String requesttype) {
+//		Requesttype = requesttype;
+//	}
+	
 	public int getStatus() {
 		if(completed) {
 			// 0 mean completed true;
@@ -148,6 +116,9 @@ public class Order {
 		}else {
 			return 1;
 		}
+	}
+	public ArrayList<Condiment> getCondiments(){
+		return this.drink.getCondiments();
 	}
 	
 

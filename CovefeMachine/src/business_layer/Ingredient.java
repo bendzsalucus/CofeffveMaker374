@@ -1,130 +1,38 @@
 package business_layer;
 
-public abstract class Ingredient {
+import java.util.ArrayList;
 
-	private String name;
-	private String description;
-	protected Ingredient wrappee;
+import jdk.jfr.Description;
 
-	public Ingredient(String name, String desciption) {
-		this.name = name;
-		this.description = desciption;
+public abstract class Ingredient extends Drink{
+	protected String drinkName = "unknown drink";
+	protected String objectName = "Unknown condiment";
+	protected String description = "Unknown condiment";
+	protected String commandStep = "Unknown commandStep";
+	protected String drinkType = "Ingredient";
+	protected ArrayList<Condiment> condiments;
+	protected Drink wrappee;
+
+	public String getObjectName() {
+		return this.objectName;
 	}
-
-	public String getName() {
-		return this.name;
+	
+	public String getDrinkName() {
+		return this.drinkName;
 	}
 
 	public String getDescription() {
 		return this.description;
 	}
-
-	public abstract void nextIngredient(Ingredient i);
-
-	public void getProcessString() {
-		if (this.wrappee != null){
-			System.out.println(this.wrappee.processName());
-			}
-		System.out.println(this.getName());
-
+	
+	public String getCommandStep() {
+		return this.commandStep;
 	}
 	
-//	 "command": {
-//	    "controller_id": 2,
-//	    "coffee_machine_id": 1,
-//	    "orderID": 1,
-//	    "DrinkName": "Large Latte",
-//	    "Requesttype": "Programmable",
-//	    "Options:": [
-//	        {"Name": "hazelnut", "qty": 4}
-//	    ]
-//	    "Recipe": [
-//	        {"commandstep": "steam", "object": "milk"},
-//	        {"commandstep": "steam", "object": "milk"},
-//	        {"commandstep": "add", "object": "expresso"},
-//	        {"commandstep": "add", "object": "expresso"},
-//	        {"commandstep": "mix"},
-//	        {"commandstep": "top", "object": "whipped cream"}
-//	    ]
-//	}
+	public Drink getWrappee(){
+		return this.wrappee;
+	}
 	
+	public abstract Drink wrap(Drink drink);
 	
-
-	private String processName() {
-		if (this.wrappee != null){
-			return wrappee.processName() + this.getName();}
-		return this.getName(); 
-		
-	}
-}
-
-
-class Bark extends Ingredient {
-
-	public Bark() {
-		super("Bark", "Chocolate Goodness.");
-	}
-
-	@Override
-	public void nextIngredient(Ingredient i) {
-		super.wrappee = i;
-
-	}
-
-}
-
-class Milk extends Ingredient {
-
-	public Milk() {
-		super("Milk", "Comes from a cow.");
-	}
-
-	@Override
-	public void nextIngredient(Ingredient i) {
-		super.wrappee = i;
-
-	}
-
-}
-
-class Caramel extends Ingredient {
-
-	public Caramel() {
-		super("Caramel", "Sweet brown goodness.");
-	}
-
-	@Override
-	public void nextIngredient(Ingredient i) {
-		super.wrappee = i;
-
-	}
-
-}
-
-class Cinnamon extends Ingredient {
-
-	public Cinnamon() {
-		super("Cinnamon", "Challenge stuff.");
-	}
-
-	@Override
-	public void nextIngredient(Ingredient i) {
-		super.wrappee = i;
-
-	}
-
-}
-
-class Sugar extends Ingredient {
-
-	public Sugar() {
-		super("Sugar", "Sweeeeeeeet. Made from cane.");
-	}
-
-	@Override
-	public void nextIngredient(Ingredient i) {
-		super.wrappee = i;
-
-	}
-
 }

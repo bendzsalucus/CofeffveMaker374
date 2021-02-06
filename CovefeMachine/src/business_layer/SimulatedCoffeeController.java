@@ -20,7 +20,7 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	BrewBehavior behavior;
 	String status;
-	DrinkRecipe recipe; // Thread local variables? :(
+	Drink drink; // Thread local variables? :(
 	int id;
 	
 	public SimulatedCoffeeController(int id) {
@@ -28,18 +28,12 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 		this.behavior = new SimpleBehavior(); // temporary
 		
 	}
-	
-//	public void simulateControllerResponse() {
-//		try {
-//			parser.parseControllerResponse();
-//		} catch (IOException | ParseException | URISyntaxException e) {
-//			System.out.println("[JSONSimulation]  Controller Response Parsing falls");
-//			e.printStackTrace();
-//		}
-//	}
 
 	public void run() { // Just simulates the creation of the coffee at a particular station, possibly including manual input
 		System.out.println();
+		System.out.print("[Controller] Brewbehavior Selecting for Controller Type: ");
+		this.behavior = selectingBrewBehavior(order);
+		System.out.println(behavior);
 		status = "Order Started";
 		coffeeControllerNotice("Started coffee: " + order.getDrinkName());
 		ArrayList<OrderConResponse> responses = behavior.brew(order);
@@ -57,24 +51,29 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 				System.out.println("[Controller Response] Brewing with another machine...");
 //				behavior.brew(order);
 			}
-
-//			if(order.getErrorcode()==2) {
-//							
-//						}
-//			if(order.getErrorcode()==2) {
-//				
-//			}Adding more errors from coffee machine that leads to cancelling the orders
-		}
 //		coffeeControllerNotice("Dispersed coffee: " + order.getDrinkName());
 		notifyObservers();
+		}
+	}
+
+	private BrewBehavior selectingBrewBehavior(Order processingOrder) {
+		if(processingOrder.getRequesttype().equals("Simple")) {
+			return new SimpleBehavior();
+		}else if(processingOrder.getRequesttype().equals("Automated")){
+			return new AutomatedBehavior();
+		}else if(processingOrder.getRequesttype().equals("Programmable")) {
+			return new ProgrammableBehavior();
+		}
+		System.out.println("[Controller] Failing to select a brewBehavior");
+		return null;
 	}
 
 	public void registerObserver(Observer o) {
 		if(server != null) {
-			coffeeControllerNotice("Tried to connect to multiple servers. :(");
+			coffeeControllerNotice("[Controller] Tried to connect to multiple servers. :(");
 		} else {
 			server = o;
-			coffeeControllerNotice("Connected to server!");
+			coffeeControllerNotice("[Controller] Connected to server!");
 		}
 		
 	}
@@ -92,22 +91,14 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	public void update(Order order) {
 		this.order = order;
-		this.recipe = order.getDrinkRecipe();
-		specifyOrderRequestType(order);
+		this.drink = order.getDrink();
         Thread t = new Thread(this);
         t.start();
 	}
-	
-	private void specifyOrderRequestType(Order order) {
-		if(order.getIngredients().size()>0) {
-			order.setRequesttype("Automated");
-		}else {
-			order.setRequesttype("Simple");
-		}
-	}
+
 
 	private void coffeeControllerNotice(String message) {
-		System.out.println("\u001B[32mCoffee controller " + id + ": " + message + "\u001B[0m");
+		System.out.println("[Controller] \u001B[32mCoffee controller " + id + ": " + message + "\u001B[0m");
 	}
 
 	@Override
@@ -116,6 +107,21 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 		//all methods are in the same interface for convince.
 		
 	}
+
+	@Override
+	public void notifyObservers(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+//	public void simulateControllerResponse() {
+//	try {
+//		parser.parseControllerResponse();
+//	} catch (IOException | ParseException | URISyntaxException e) {
+//		System.out.println("[JSONSimulation]  Controller Response Parsing falls");
+//		e.printStackTrace();
+//	}
+//}
 
 
 	

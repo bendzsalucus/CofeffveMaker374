@@ -2,16 +2,17 @@ package business_layer;
 
 import java.util.ArrayList;
 
-public class SimpleOrderFactory implements AbstractOrderFactory {
+public class AutomatedOrderFactory implements AbstractOrderFactory {
 	Drinks drinks = new Drinks(); // TODO use singleton pattern here
-	ArrayList<Drink> simpleDrinks = drinks.getSimpleDrinks();
-	
+	ArrayList<Drink> autoDrinks = drinks.getAutoDrinks();
+
 	@Override
 	public Order createOrder(int orderID, String street, int ZIP, String drinkName, ArrayList<Condiment> condiments) {
-		// Not supporting Condiments
-		for(Drink currentDrink: simpleDrinks) {
+		// TODO Auto-generated method stub
+		for(Drink currentDrink: autoDrinks) {
 			if(currentDrink.getDrinkName().equals(drinkName)) {
 				Drink drink = currentDrink;
+				drink.addMoreCondiments(condiments);
 				Order order = new AutoOrder(orderID, street, ZIP, drink);
 				return order;
 			}
@@ -28,4 +29,5 @@ public class SimpleOrderFactory implements AbstractOrderFactory {
 	
 	
 	
+
 }

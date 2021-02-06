@@ -1,6 +1,5 @@
 package presentation_layer;
 
-import business_layer.DrinkRecipe;
 import business_layer.Order;
 import business_layer.Server;
 import interfaces.*;
@@ -64,6 +63,12 @@ public class SimulatedMobileDevice implements Observer, Subject, Runnable {
 
 	@Override
 	public void updateOrder(OrderConResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservers(Order order) {
 		// TODO Auto-generated method stub
 		
 	}
