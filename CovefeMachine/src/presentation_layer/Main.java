@@ -89,7 +89,7 @@ public class Main {
 	private static void init() throws URISyntaxException, FileNotFoundException, IOException {
 		String jarLoc;
 		String jsonFileName = "json_examples/UC4Testing.json";
-		jarLoc = new File(Parsers.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
+		jarLoc = new File(ResponseProcessor.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
 		String[] path = jarLoc.split("\\\\");
 		String containerLoc = "";
 		for(int i =0; i < path.length -1; i++) {

@@ -12,10 +12,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import presentation_layer.OrderConResponse;
-import presentation_layer.Parsers;
+import presentation_layer.ResponseProcessor;
 
 public class ProgrammableBehavior implements BrewBehavior {
-	Parsers parser = new Parsers();
+	ResponseProcessor parser = new ResponseProcessor();
 	String controllerType = "Programmable";
 
 	public ProgrammableBehavior() {

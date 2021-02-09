@@ -12,7 +12,7 @@ import presentation_layer.*;
 
 public class Server implements Observer, Subject {
 
-	Parsers parser;
+	ResponseProcessor parser;
 	ArrayList<Observer> controllerObservers;
 	ArrayList<Order> orders;
 	ArrayList<Orderer> orderers;
@@ -100,7 +100,7 @@ public class Server implements Observer, Subject {
 	}
 	
 	private void init() {
-		parser = new Parsers();
+		parser = new ResponseProcessor();
 		controllerObservers = new ArrayList<Observer>();
 		orders = new ArrayList<Order>();
 		orderers = new ArrayList<Orderer>();

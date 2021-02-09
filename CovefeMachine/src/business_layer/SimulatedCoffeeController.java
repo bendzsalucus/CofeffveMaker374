@@ -9,13 +9,13 @@ import org.json.simple.parser.ParseException;
 import interfaces.Observer;
 import interfaces.Subject;
 import presentation_layer.OrderConResponse;
-import presentation_layer.Parsers;
+import presentation_layer.ResponseProcessor;
  
 
 public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	Observer server;
-	Parsers parser;
+	ResponseProcessor parser;
 	Order order;
 	
 	BrewBehavior behavior;

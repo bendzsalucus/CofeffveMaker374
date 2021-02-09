@@ -10,11 +10,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import presentation_layer.OrderConResponse;
-import presentation_layer.Parsers;
+import presentation_layer.ResponseProcessor;
 
 public class SimpleBehavior implements BrewBehavior {
 	String controllerType = "Simple";
-	Parsers parser = new Parsers();
+	ResponseProcessor parser = new ResponseProcessor();
 	public SimpleBehavior() {}
 	@Override
 	public ArrayList<OrderConResponse> brew(Order order) {
