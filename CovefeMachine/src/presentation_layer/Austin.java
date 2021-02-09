@@ -38,6 +38,7 @@ public class Austin {
 		ArrayList<String> austinUsualDrinks = new ArrayList<String>();
 		austinUsualDrinks.add("Mocha");
 		austinUsualDrinks.add("Americano");
+		austinUsualDrinks.add("Regular Latte");
 
 		class AmericanoListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
