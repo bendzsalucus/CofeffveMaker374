@@ -12,7 +12,7 @@ public class SimpleOrderFactory implements AbstractOrderFactory {
 		for(Drink currentDrink: simpleDrinks) {
 			if(currentDrink.getDrinkName().equals(drinkName)) {
 				Drink drink = currentDrink;
-				Order order = new AutoOrder(orderID, street, ZIP, drink);
+				Order order = new SimpleOrder(orderID, street, ZIP, drink);
 				return order;
 			}
 		}

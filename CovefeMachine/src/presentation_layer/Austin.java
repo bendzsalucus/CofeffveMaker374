@@ -37,6 +37,7 @@ public class Austin {
 		panel.add(americano);
 		ArrayList<String> austinUsualDrinks = new ArrayList<String>();
 		austinUsualDrinks.add("Mocha");
+		austinUsualDrinks.add("Expresso");
 		austinUsualDrinks.add("Americano");
 		austinUsualDrinks.add("Regular Latte");
 
