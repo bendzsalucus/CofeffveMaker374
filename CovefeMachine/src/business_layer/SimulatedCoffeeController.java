@@ -89,11 +89,12 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 	
 	public void update(String message) {}
 	
-	public void update(Order order) {
+	public synchronized void update(Order order) {
 		this.order = order;
 		this.drink = order.getDrink();
-        Thread t = new Thread(this);
-        t.start();
+//        Thread t = new Thread(this);
+//        t.start();
+		this.run();
 	}
 
 

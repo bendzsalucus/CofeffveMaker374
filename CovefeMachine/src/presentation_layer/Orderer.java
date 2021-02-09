@@ -401,7 +401,6 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 		}
 		Usual createdUsual = new Usual(ArraustinUsualOrders);
 		createdUsual.setServer((Server)servers.get(0));
-		createdUsual.execute();
 		return createdUsual;
 	}
 

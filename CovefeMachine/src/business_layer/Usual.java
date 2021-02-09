@@ -17,6 +17,7 @@ public class Usual implements UsualCommand{
 	@Override
 	public void execute() {
 		for(Order currentOrder: usualOrders){
+//			System.out.println(currentOrder.getDrinkName());
 			server.update(currentOrder);
 		}
 	}
@@ -31,6 +32,13 @@ public class Usual implements UsualCommand{
 	
 	public void setServer(Server server){
 		this.server = server;
+	}
+
+	public void getOrderDrinkName() {
+		for(Order currentOrder: usualOrders) {
+			System.out.println("[Usual] " + currentOrder.getDrinkName());
+		}
+		
 	}
 
 }

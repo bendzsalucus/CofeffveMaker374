@@ -43,7 +43,13 @@ public class Austin {
 			public void actionPerformed(ActionEvent e) {
 				Orderer orderer = new Orderer("GUI Command");
 				Usual AustinUsual = orderer.createUsual(austinUsualDrinks, 123456, "5611 Hazen St", 77081);
+//				AustinUsual.getOrderDrinkName();
 				setCommand(AustinUsual);
+				invokeCommand(AustinUsualSlot);
+			}
+
+			private void invokeCommand(Usual commandSlot) {
+				commandSlot.execute();
 			}
 
 			private void setCommand(Usual austinUsual) {
