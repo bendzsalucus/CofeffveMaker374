@@ -1,16 +1,11 @@
 package presentation_layer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthTextAreaUI;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,17 +13,18 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import IngredientPackage.Ingredients;
-//import business_layer.DrinkRecipe;
-import business_layer.Drinks;
-import business_layer.Ingredient;
 import business_layer.AbstractOrderFactory;
 import business_layer.AutomatedOrderFactory;
 import business_layer.Condiment;
 import business_layer.Drink;
+//import business_layer.DrinkRecipe;
+import business_layer.Drinks;
+import business_layer.Ingredient;
 import business_layer.Order;
 import business_layer.ProgrammableOrderFactory;
 import business_layer.Server;
 import business_layer.SimpleOrderFactory;
+import business_layer.Usual;
 import interfaces.Observer;
 import interfaces.Subject;
 
@@ -47,7 +43,8 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 	private ArrayList<AbstractOrderFactory> factories;
 	private JSONObject parsedJSON;
 	private Ingredients ingredients = Ingredients.getInstance();
-
+	private Usual Usual1;
+	
 	public Orderer() {
 		init();
 		handleOrdering(false, new Scanner(System.in));
@@ -57,6 +54,8 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 	public Orderer(String mode) {
 		// This initiation makes orderer take in string for order-input in JSON format
 		if (mode.equals("orderTakerMode")) {
+			init();
+		}else if (mode.equals("GUI Command")){
 			init();
 		}
 	}
@@ -380,7 +379,7 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 			System.out.println("Error Within OrderInputJSON");
 			e.printStackTrace();
 		}
-	}
+	} 
 
 	@Override
 	public Condiment createCondiment(String condimentName) {
@@ -392,6 +391,18 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 		}
 		System.out.println("[Orderer] Unknown Condiment in JSON request");
 		return null;
+	}
+
+	public Usual createUsual(ArrayList<String> austinUsualDrinks, int orderID, String street, int ZIP ) {
+		ArrayList<Order> ArraustinUsualOrders = new ArrayList<>(); 
+		for(String currentDrink: austinUsualDrinks){
+			Order currentOrder= createOrderFromFactory(orderID, street, ZIP, currentDrink, new ArrayList<Condiment>());
+			ArraustinUsualOrders.add(currentOrder);
+		}
+		Usual createdUsual = new Usual(ArraustinUsualOrders);
+		createdUsual.setServer((Server)servers.get(0));
+		createdUsual.execute();
+		return createdUsual;
 	}
 
 }

@@ -2,29 +2,18 @@ package presentation_layer;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+
+import business_layer.Usual;
 
 public class Austin {
-
+	public  Usual AustinUsualSlot; 
 	private JFrame frame;
 
 	public static void main(String[] args) {
@@ -46,10 +35,19 @@ public class Austin {
 		panel.setBackground(Color.BLACK);
 		panel.add(mocha);
 		panel.add(americano);
+		ArrayList<String> austinUsualDrinks = new ArrayList<String>();
+		austinUsualDrinks.add("Mocha");
+		austinUsualDrinks.add("Americano");
 
 		class AmericanoListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("make Americano");
+				Orderer orderer = new Orderer("GUI Command");
+				Usual AustinUsual = orderer.createUsual(austinUsualDrinks, 123456, "5611 Hazen St", 77081);
+				setCommand(AustinUsual);
+			}
+
+			private void setCommand(Usual austinUsual) {
+				AustinUsualSlot = austinUsual;
 			}
 
 		}

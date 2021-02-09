@@ -8,15 +8,10 @@ import java.io.Reader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import business_layer.Condiment;
-import business_layer.Order;
 import business_layer.Server;
+import business_layer.Usual;
 
 public class Main {
 
@@ -26,13 +21,19 @@ public class Main {
 	private static HashMap<String, Condiment> ingreidientsList;
 	private static ArrayList<Condiment> condiments;
 	private static Reader UC4OrderInputJSONReader;
+	public static Usual AustinUsualSlot; 
 
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException, URISyntaxException, IOException {
 		init();
-		Orderer orderTakerMode = new Orderer("orderTakerMode");
-		orderTakerMode.inputOrderInputFromJSONString(UC4OrderInputJSONReader);
+//		Orderer orderTakerMode = new Orderer("orderTakerMode");
+//		orderTakerMode.inputOrderInputFromJSONString(UC4OrderInputJSONReader);
 		
-//		new Orderer();
+		Orderer currentOrderer = new Orderer();
+		ArrayList<String> AustinUsualDrinks = new ArrayList<String>();
+		AustinUsualDrinks.add("Large Latte");
+		AustinUsualDrinks.add("Regular Latte");
+		Usual AustinUsual =  currentOrderer.createUsual(AustinUsualDrinks, 123456, "5611 Hazen St", 77081);
+		setCommand(AustinUsual);
 
 //		new Orderer("Scarlett Surprise", new ArrayList<Integer>() {
 //			{
@@ -77,6 +78,12 @@ public class Main {
 //			e.printStackTrace();
 //		}
 //		
+	}
+
+	private static void setCommand(Usual AustinUsual) {
+		// TODO Auto-generated method stub.
+		AustinUsualSlot = AustinUsual; 
+		
 	}
 
 	private static void init() throws URISyntaxException, FileNotFoundException, IOException {
