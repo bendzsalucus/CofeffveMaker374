@@ -61,8 +61,9 @@ public class Server implements Observer, Subject {
 	public void updateOrder(OrderConResponse response) {
 		// updateOrder updates the order with response from the controllers.
 		for (Order currentOrder : orders) {
+//			System.out.println("here" + currentOrder.orderID);
 			if (currentOrder.getOrderID() == response.getOrderID()) {
-				if (response.getOrderID() == 0) {
+				if (response.getStatus() == 0) {
 					// status 0 means done
 					currentOrder.setOrderCompleted();
 					System.out.println(

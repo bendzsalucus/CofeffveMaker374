@@ -42,8 +42,9 @@ public class SimulatedCoffeeController implements Observer, Subject, Runnable {
 			server.updateOrder(response);
 		}
 		
-		if(order.getStatus()==0) {
+		if(order.getStatus()==0 && !order.processed) {
 			System.out.println("[Controller Response] Brewed");
+			order.setProcessed();
 			status = "Coffee Ready "+ order.getCoffee_machine_id();
 		}else {
 			if(order.getErrorcode()==26) {

@@ -25,16 +25,24 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException, FileNotFoundException, URISyntaxException, IOException {
 		init();
+		//To test UseCase4, please uncomment line28-29
 //		Orderer orderTakerMode = new Orderer("orderTakerMode");
 //		orderTakerMode.inputOrderInputFromJSONString(UC4OrderInputJSONReader);
 		
-		Orderer currentOrderer = new Orderer();
-		ArrayList<String> AustinUsualDrinks = new ArrayList<String>();
-		AustinUsualDrinks.add("Large Latte");
-		AustinUsualDrinks.add("Regular Latte");
-		Usual AustinUsual =  currentOrderer.createUsual(AustinUsualDrinks, 123456, "5611 Hazen St", 77081);
-		setCommand(AustinUsual);
-
+//		Orderer currentOrderer = new Orderer();
+//		ArrayList<String> AustinUsualDrinks = new ArrayList<String>();
+//		AustinUsualDrinks.add("Large Latte");
+//		AustinUsualDrinks.add("Regular Latte");
+//		Usual AustinUsual =  currentOrderer.createUsual(AustinUsualDrinks, 123456, "5611 Hazen St", 77081);
+//		setCommand(AustinUsual);
+		
+		//Test handle function
+//		new Orderer();
+		
+		//Test PreOrder to see handling response from controller
+//		new Orderer("TestHandlingResponseFromControllerIncludingRebrewing");
+		
+		//To test UC3 - automated
 //		new Orderer("Scarlett Surprise", new ArrayList<Integer>() {
 //			{
 //				add(0);
@@ -43,7 +51,7 @@ public class Main {
 //			}
 //		});
 		
-
+		//To test UC3 - programable recipe
 //		new Orderer("Large Latte", new ArrayList<Integer>() {
 //			{
 //				add(0);

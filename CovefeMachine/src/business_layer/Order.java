@@ -14,9 +14,17 @@ public abstract class Order {
 	int coffee_machine_id = -999;
 	int controller_id = -999;
 	String Requesttype = "Unknown type";
+	boolean processed = false;
 	Drink drink;
-
-
+	
+	public boolean getProcessed() {
+		return processed;
+	}
+	
+	public void setProcessed() {
+		this.processed = true;
+	}
+	
 	public void setOrderCompleted() {
 		setCompleted(true);
 	}

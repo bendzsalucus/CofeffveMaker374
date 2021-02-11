@@ -57,6 +57,19 @@ public class Orderer implements Observer, Subject, OrderInputParser {
 			init();
 		}else if (mode.equals("GUI Command")){
 			init();
+		}else if(mode.equals("TestHandlingResponseFromControllerIncludingRebrewing")) {
+			init();
+			ArrayList<Condiment> condiments = new ArrayList<Condiment>();
+			Order order1 = createOrderFromFactory(1, "5500 WABASH AVE", 47803, "Americano", condiments );
+			printOrderedStatus(order1);
+			servers.get(0).update(order1);
+			Order order2 = createOrderFromFactory(2, "5500 WABASH AVE", 47803, "Expresso",condiments);
+			printOrderedStatus(order2);
+			servers.get(0).update(order2);
+			
+			Order order3 = createOrderFromFactory(3, "5500 WABASH AVE", 47803, "Pumpkin Spice",condiments);
+			printOrderedStatus(order3);
+			servers.get(0).update(order3);
 		}
 	}
 
