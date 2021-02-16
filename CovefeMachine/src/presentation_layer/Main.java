@@ -42,8 +42,17 @@ public class Main {
 		//Test PreOrder to see handling response from controller
 //		new Orderer("TestHandlingResponseFromControllerIncludingRebrewing");
 		
-		//To test UC3 - automated
-//		new Orderer("Scarlett Surprise", new ArrayList<Integer>() {
+		
+		
+		//To test UC1
+//		new Orderer("Expresso", new ArrayList<Integer>() {
+//			{
+//			}
+//		});
+		
+		
+		//To test UC2 - automated
+//		new Orderer("Mocha", new ArrayList<Integer>() {
 //			{
 //				add(0);
 //				add(0);
